@@ -8,7 +8,7 @@ function verificarParOuImpar(numero) {
 }
 
 export default props => (
-  <View>
+  <View style={Padrao.container}>
     {
       verificarParOuImpar(props.numero)
     }
