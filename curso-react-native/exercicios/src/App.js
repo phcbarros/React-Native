@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View} from 'react-native';
+import { StyleSheet, View} from 'react-native';
+import Simples from './componentes/simples'
 
 export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.f40}>App!</Text>
+        <Simples texto={'Flexível'}/>
       </View>
     )
   }
@@ -17,8 +18,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-  },
-  f40: {
-    fontSize: 40
   }
 })
