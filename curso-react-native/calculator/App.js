@@ -1,11 +1,18 @@
 import React, { Component } from 'react'
 import { StyleSheet, View } from 'react-native'
 import Botao from './src/components/botao'
+import Display from './src/components/display'
 
 export default class App extends Component {
+
+  state = {
+    displayValue: 0
+  }
+  
   render() {
     return (
       <View style={styles.container}>
+        <Display displayValue={this.state.displayValue} />
         <View style={styles.buttons}>
           <Botao label='AC' />
           <Botao label='/' />
