@@ -13,13 +13,29 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     borderWidth: 1,
     borderColor: '#888'
+  },
+  buttonDouble: {
+    width: dimensao * 2
+  },
+  buttonTriple: {
+    width: dimensao * 3
+  },
+  buttonOperation: {
+    backgroundColor: '#fa8231',
+    color: '#fff'
   }
 })
 
 export default props => {
+  const stylesButton = [styles.button]
+
+  if(props.double) stylesButton.push(styles.buttonDouble)
+  if(props.triple) stylesButton.push(styles.buttonTriple)
+  if(props.operation) stylesButton.push(styles.buttonOperation)
+
   return (
-    <TouchableHighlight onPress={props.onClick}>
-      <Text style={styles.button}>{props.label}</Text>
+    <TouchableHighlight onPress={() => props.onClick(props.label)}>
+      <Text style={stylesButton}>{props.label}</Text>
     </TouchableHighlight>
   )
 }
