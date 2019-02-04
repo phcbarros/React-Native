@@ -34,7 +34,7 @@ export const Pai = props => (
 )
 
 export const Avo = props => (
-  <View style={Padrao.container}>
+  <View >
     <Text {...fonte}>Avô: {props.nome} {props.sobrenome}</Text>
     <Pai nome='Paulo' sobrenome={props.sobrenome}>
       <Filho nome='Melissa' />
