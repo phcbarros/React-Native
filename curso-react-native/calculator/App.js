@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { StyleSheet, View } from "react-native";
 import Botao from "./src/components/botao";
 import Display from "./src/components/display";
-import { equal } from "uri-js";
 
 const initialState = {
   displayValue: "0",
@@ -15,10 +14,11 @@ export default class App extends Component {
   state = { ...initialState }; //clone do initialState
 
   addDigit = n => {
-    if (n === "." && this.state.displayValue.includes(".")) return;
-
     const clearDisplay =
       this.state.displayValue === "0" || this.state.clearDisplay;
+
+    if (n === "." && !clearDisplay && this.state.displayValue.includes("."))
+      return;
     const current = clearDisplay ? "" : this.state.displayValue;
     const displayValue = current + n;
     this.setState({ displayValue, clearDisplay: false });
@@ -42,6 +42,9 @@ export default class App extends Component {
       const equals = operation === "=";
       const values = [...this.state.values];
       try {
+        console.table(values);
+        console.log(operation);
+        //if (!equals)
         values[0] = eval(`${values[0]} ${operation} ${values[1]}`);
       } catch (error) {
         values[0] = this.state.values[0];
