@@ -2,11 +2,24 @@ import React from "react";
 import { View, Text, Button } from "react-native";
 
 class HomeScreen extends React.Component {
+  componentDidMount() {
+    this.props.navigation.setParams({ increaseCount: this._increaseCount });
+  }
+
+  state = {
+    count: 0
+  };
+
+  _increaseCount = () => {
+    this.setState({ count: this.state.count + 1 });
+  };
+
   render() {
     /* 1. Navigate to the Details route with params */
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <Text>Home Screen</Text>
+        <Text>Count: {this.state.count}</Text>
         <Button
           title="Ir para detalhes"
           onPress={() =>
@@ -22,8 +35,13 @@ class HomeScreen extends React.Component {
   }
 }
 
-HomeScreen.navigationOptions = {
-  title: "Home"
+HomeScreen.navigationOptions = ({ navigation }) => {
+  return {
+    title: "Home",
+    headerRight: (
+      <Button title="+1" onPress={navigation.getParam("increaseCount")} />
+    )
+  };
 };
 
 export default HomeScreen;
