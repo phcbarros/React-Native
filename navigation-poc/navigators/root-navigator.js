@@ -1,7 +1,7 @@
 import { createStackNavigator, createAppContainer } from "react-navigation";
-import { HomeScreen, DetailsScreen } from "../components/screens";
+import { HomeScreen, DetailsScreen, ModalScreen } from "../components/screens";
 
-const RootStack = createStackNavigator(
+const MainStacK = createStackNavigator(
   {
     Home: HomeScreen,
     Details: DetailsScreen
@@ -17,6 +17,17 @@ const RootStack = createStackNavigator(
         fontWeight: "bold"
       }
     }
+  }
+);
+
+const RootStack = createStackNavigator(
+  {
+    Main: MainStacK,
+    MyModal: ModalScreen
+  },
+  {
+    mode: "modal",
+    headerMode: "none"
   }
 );
 

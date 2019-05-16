@@ -1,11 +1,6 @@
 import React from "react";
-import { View, Text, Button, Modal, StyleSheet } from "react-native";
-
-const styles = StyleSheet.create({
-  buttonContainer: {
-    margin: 10
-  }
-});
+import { View, Text, Button, Modal } from "react-native";
+import styles from "./style";
 
 class DetailsScreen extends React.Component {
   state = { modalVisible: false };
@@ -59,7 +54,7 @@ class DetailsScreen extends React.Component {
     //const otherParam = navigation.getParam("otherParam", "valor default");
     const otherParam = navigation.state.params.otherParam; //se nao exitir retornar null
     return (
-      <View style={{ flex: 1, alignItems: "center", margin: 30 }}>
+      <View style={[styles.component, { margin: 30 }]}>
         <Text>Details Screen</Text>
         <Text>itemId: {id}</Text>
         <Text>otherParam: {JSON.stringify(otherParam)}</Text>

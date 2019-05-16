@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, Button } from "react-native";
+import styles from "./style";
 
 class HomeScreen extends React.Component {
   componentDidMount() {
@@ -17,7 +18,7 @@ class HomeScreen extends React.Component {
   render() {
     /* 1. Navigate to the Details route with params */
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <View style={styles.component}>
         <Text>Home Screen</Text>
         <Text>Count: {this.state.count}</Text>
         <Button
@@ -40,6 +41,9 @@ HomeScreen.navigationOptions = ({ navigation }) => {
     title: "Home",
     headerRight: (
       <Button title="+1" onPress={navigation.getParam("increaseCount")} />
+    ),
+    headerLeft: (
+      <Button title="Info" onPress={() => navigation.navigate("MyModal")} />
     )
   };
 };
