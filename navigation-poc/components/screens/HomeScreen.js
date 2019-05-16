@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Button } from "react-native";
 
-export default class HomeScreen extends React.Component {
+class HomeScreen extends React.Component {
   render() {
     /* 1. Navigate to the Details route with params */
     return (
@@ -12,7 +12,8 @@ export default class HomeScreen extends React.Component {
           onPress={() =>
             this.props.navigation.navigate("Details", {
               itemId: 50,
-              otherParam: "outro parâmetro"
+              otherParam: "outro parâmetro",
+              title: "Details of this page"
             })
           }
         />
@@ -20,3 +21,9 @@ export default class HomeScreen extends React.Component {
     );
   }
 }
+
+HomeScreen.navigationOptions = {
+  title: "Home"
+};
+
+export default HomeScreen;

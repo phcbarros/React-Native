@@ -1,8 +1,13 @@
 import React from "react";
-import { View, Text, Button, Modal } from "react-native";
-import { createStackNavigator, createAppContainer } from "react-navigation";
+import { View, Text, Button, Modal, StyleSheet } from "react-native";
 
-export default class DetailsScreen extends React.Component {
+const styles = StyleSheet.create({
+  buttonContainer: {
+    margin: 10
+  }
+});
+
+class DetailsScreen extends React.Component {
   state = { modalVisible: false };
 
   showModal = () => {
@@ -28,6 +33,25 @@ export default class DetailsScreen extends React.Component {
     );
   }
 
+  renderButtonShowModal() {
+    return (
+      <View style={styles.buttonContainer}>
+        <Button title="Exibir Modal" onPress={this.showModal} />
+      </View>
+    );
+  }
+
+  renderButtonUpdateTitle() {
+    return (
+      <View style={styles.buttonContainer}>
+        <Button
+          title="Update the title"
+          onPress={() => this.props.navigation.setParams({ title: "Updated!" })}
+        />
+      </View>
+    );
+  }
+
   render() {
     /* 2. Get the param, provide a fallback value if not available */
     const { navigation } = this.props;
@@ -35,13 +59,30 @@ export default class DetailsScreen extends React.Component {
     //const otherParam = navigation.getParam("otherParam", "valor default");
     const otherParam = navigation.state.params.otherParam; //se nao exitir retornar null
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <View style={{ flex: 1, alignItems: "center", margin: 30 }}>
         <Text>Details Screen</Text>
         <Text>itemId: {id}</Text>
         <Text>otherParam: {JSON.stringify(otherParam)}</Text>
-        <Button title="Exibir Modal" onPress={this.showModal} />
+        {this.renderButtonShowModal()}
         {this.renderModal()}
+        {this.renderButtonUpdateTitle()}
       </View>
     );
   }
 }
+
+DetailsScreen.navigationOptions = ({ navigation, navigationOptions }) => {
+  return {
+    title: navigation.getParam("title", "Details"),
+    headerStyle: {
+      backgroundColor: "#0064e1"
+    },
+    headerTintColor: "#fff", //font color
+    headerTitleStyle: {
+      //text adjusts
+      fontWeight: "bold"
+    }
+  };
+};
+
+export default DetailsScreen;
