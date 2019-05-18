@@ -10,15 +10,16 @@ import {
   ModalScreen,
   SettingsScreen
 } from "../components/screens";
+import Icon from "react-native-vector-icons/MaterialIcons";
 import { TabBarLabel } from "../components/custom";
 
 const MainStacK = createStackNavigator(
   {
-    Home1: HomeScreen,
+    Home: HomeScreen,
     Details: DetailsScreen
   },
   {
-    initialRouteName: "Home1",
+    initialRouteName: "Home",
     defaultNavigationOptions: {
       headerStyle: {
         backgroundColor: "#f4511e"
@@ -33,27 +34,43 @@ const MainStacK = createStackNavigator(
 
 const TabStack = createBottomTabNavigator(
   {
-    Home: { screen: MainStacK },
+    Main: {
+      screen: MainStacK,
+      navigationOptions: {
+        tabBarLabel: "Home"
+      }
+    },
     Settings: SettingsScreen
   },
   {
+    defaultNavigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused, horizontal, tintColor }) => {
+        const { routeName } = navigation.state;
+        let iconName;
+        if (routeName === "Main") {
+          iconName = `home`;
+        } else if (routeName === "Settings") {
+          iconName = `settings`;
+        }
+
+        // You can return any component that you like here!
+        return <Icon name={iconName} size={25} color={tintColor} />;
+      }
+      // tabBarLabel: ({ focused }) => {
+      //   const { routeName } = navigation.state;
+      //   let name;
+      //   if (routeName === "Main") {
+      //     name = "Home";
+      //   } else name = routeName;
+
+      //   return <TabBarLabel label={name} focused={focused} />;
+      // }
+    }),
+    initialRouteName: "Main",
     tabBarOptions: {
       activeTintColor: "blue",
-      inactiveTintColor: "gray",
-      showIcon: false
-    },
-    // defaultNavigationOptions: ({ focused, navigation }) => ({
-    //   tabBarLabel: () => {
-    //     const { routeName } = navigation.state;
-    //     let name;
-    //     if (routeName === "Home") {
-    //       name = "Home";
-    //     } else name = routeName;
-
-    //     return <TabBarLabel label={name} focused={focused} />;
-    //   }
-    // }),
-    initialRouteName: "Home"
+      inactiveTintColor: "gray"
+    }
   }
 );
 

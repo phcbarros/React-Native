@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text } from "react-native";
 
 const TabBarLabel = props => {
+  const color = props.focused ? "#0064e1" : "";
   return (
     <View
       style={{
@@ -10,9 +11,7 @@ const TabBarLabel = props => {
         justifyContent: "center"
       }}
     >
-      <Text style={{ color: props.focused ? "#0064e1" : "" }}>
-        {props.label}
-      </Text>
+      <Text style={{ color }}>{props.label}</Text>
     </View>
   );
 };
