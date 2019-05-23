@@ -141,7 +141,7 @@ A diferença entre os métodos **_navigate_** e **\*push** é que o primeiro qua
 
 ### Navegando de volta
 
-O stacj navigator sempre irá adicionar um header com o botão volta quando for possível navegar de volta a partir da tela onde você está, caso contrário nenhum botão será adicionado. É possível programáticamente disparar o comportamento de voltar por meio do método **_back_**
+O stack navigator sempre irá adicionar um header com o botão volta quando for possível navegar de volta a partir da tela onde você está, caso contrário nenhum botão será adicionado. É possível programáticamente disparar o comportamento de voltar por meio do método **_back_**
 
 ```javascript
 <Button
@@ -201,15 +201,26 @@ const TabNavigator = createBottomTabNavigator({
 export default createAppContainer(TabNavigator);
 ```
 
-Usando tabNavigation com stackNavigation e configurando os ícones para cada aba.q
+### Usando tabNavigation com stackNavigation e configurando os ícones para cada aba
+
+O **_createButtonTabNavigator_** é uma função que recebe como parâmetros uma configuração de rotas e um objeto de configuração opcional igual ao **_createStackNavigator_**. Na criação das nossas abas iremos criar a aba TabHome e TabSettings. Na TabHome podemos passar na sua propriedade screen o componente criado pela função createStackNavigator e na aba de Settings atribuímos o componente SettingsScreen.
+
+Aproveitamos e comfiguramos os ícones para cada uma das abas por meio da propriedade **_tabBarIcon_** do objeto **_defaultNavigationOptions_** para mais informações clique [aqui](https://reactnavigation.org/docs/en/tab-based-navigation.html).
 
 ```javascript
+import React from "react";
+import {
+  createStackNavigator,
+  createAppContainer,
+  createBottomTabNavigator
+} from "react-navigation";
+
 const MainStacK = createStackNavigator({
   Home: HomeScreen,
   Details: DetailsScreen
 });
 
-const TabStack = createBottomTabNavigator(
+const tabNavigator = createBottomTabNavigator(
   {
     TabHome: {
       screen: MainStacK,
@@ -217,7 +228,7 @@ const TabStack = createBottomTabNavigator(
         tabBarLabel: "Home"
       }
     },
-    Settings: SettingsScreen
+    TabSettings: SettingsScreen
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
@@ -226,7 +237,7 @@ const TabStack = createBottomTabNavigator(
         let iconName;
         if (routeName === "TabHome") {
           iconName = `home`;
-        } else if (routeName === "Settings") {
+        } else if (routeName === "TabSettings") {
           iconName = `settings`;
         }
         return <Icon name={iconName} size={25} color={tintColor} />;
@@ -239,4 +250,7 @@ const TabStack = createBottomTabNavigator(
     }
   }
 );
+
+const AppContainer = createAppContainer(tabNavigator);
+export default AppContainer;
 ```
