@@ -33,13 +33,14 @@ class HomeScreen extends React.Component {
   }
 
   renderButtonGoToSettings() {
-    <View style={styles.buttonContainer}>
-      <Button
-        title="Go to Settings"
-        onPress={() => this.props.navigation.navigate("Settings")}
-      />
-      />
-    </View>;
+    return (
+      <View style={styles.buttonContainer}>
+        <Button
+          title="Go to Settings"
+          onPress={() => this.props.navigation.navigate("Settings")}
+        />
+      </View>
+    );
   }
 
   render() {
