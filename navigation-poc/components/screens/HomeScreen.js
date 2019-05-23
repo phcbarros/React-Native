@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Button } from "react-native";
+import { View, Text, Button, AsyncStorage } from "react-native";
 import styles from "./style";
 
 class HomeScreen extends React.Component {
@@ -54,6 +54,19 @@ class HomeScreen extends React.Component {
     );
   }
 
+  renderButtonSignOut() {
+    return (
+      <View style={styles.buttonContainer}>
+        <Button title="Actually, sign me out :)" onPress={this.signOutAsync} />
+      </View>
+    );
+  }
+
+  signOutAsync = async () => {
+    await AsyncStorage.clear();
+    this.props.navigation.navigate("Auth");
+  };
+
   render() {
     /* 1. Navigate to the Details route with params */
     return (
@@ -63,6 +76,7 @@ class HomeScreen extends React.Component {
         {this.renderButttonGoToDetails()}
         {this.renderButtonGoToSettings()}
         {this.renderButtonOpenDrawer()}
+        {this.renderButtonSignOut()}
       </View>
     );
   }

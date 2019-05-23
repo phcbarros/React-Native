@@ -3,14 +3,17 @@ import {
   createStackNavigator,
   createAppContainer,
   createBottomTabNavigator,
-  createDrawerNavigator
+  createDrawerNavigator,
+  createSwitchNavigator
 } from "react-navigation";
 import {
   HomeScreen,
   DetailsScreen,
   ModalScreen,
   SettingsScreen,
-  NotificationScreen
+  NotificationScreen,
+  AuthLoadingScreen,
+  SignInScreen
 } from "../components/screens";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { TabBarLabel } from "../components/custom";
@@ -31,7 +34,16 @@ const MainStacK = createStackNavigator(
         fontWeight: "bold"
       }
     }
-    //mode: "modal"
+  }
+);
+
+const AuthStack = createStackNavigator(
+  {
+    SignIn: SignInScreen
+  },
+  {
+    mode: "modal",
+    headerMode: "none"
   }
 );
 
@@ -104,6 +116,11 @@ const DrawerStack = createDrawerNavigator({
   }
 });
 
-const AppContainer = createAppContainer(DrawerStack);
-DrawerStack;
+const SwitchNavigator = createSwitchNavigator({
+  AuthLoading: AuthLoadingScreen,
+  App: DrawerStack,
+  Auth: AuthStack
+});
+
+const AppContainer = createAppContainer(SwitchNavigator);
 export default AppContainer;
