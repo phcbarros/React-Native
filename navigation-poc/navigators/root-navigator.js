@@ -2,13 +2,15 @@ import React from "react";
 import {
   createStackNavigator,
   createAppContainer,
-  createBottomTabNavigator
+  createBottomTabNavigator,
+  createDrawerNavigator
 } from "react-navigation";
 import {
   HomeScreen,
   DetailsScreen,
   ModalScreen,
-  SettingsScreen
+  SettingsScreen,
+  NotificationScreen
 } from "../components/screens";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { TabBarLabel } from "../components/custom";
@@ -29,12 +31,13 @@ const MainStacK = createStackNavigator(
         fontWeight: "bold"
       }
     }
+    //mode: "modal"
   }
 );
 
 const TabStack = createBottomTabNavigator(
   {
-    Main: {
+    TabHome: {
       screen: MainStacK,
       navigationOptions: {
         tabBarLabel: "Home"
@@ -47,7 +50,7 @@ const TabStack = createBottomTabNavigator(
       tabBarIcon: ({ focused, horizontal, tintColor }) => {
         const { routeName } = navigation.state;
         let iconName;
-        if (routeName === "Main") {
+        if (routeName === "TabHome") {
           iconName = `home`;
         } else if (routeName === "Settings") {
           iconName = `settings`;
@@ -59,14 +62,14 @@ const TabStack = createBottomTabNavigator(
       // tabBarLabel: ({ focused }) => {
       //   const { routeName } = navigation.state;
       //   let name;
-      //   if (routeName === "Main") {
+      //   if (routeName === "TabHome") {
       //     name = "Home";
       //   } else name = routeName;
 
       //   return <TabBarLabel label={name} focused={focused} />;
       // }
     }),
-    initialRouteName: "Main",
+    initialRouteName: "TabHome",
     tabBarOptions: {
       activeTintColor: "blue",
       inactiveTintColor: "gray"
@@ -74,17 +77,33 @@ const TabStack = createBottomTabNavigator(
   }
 );
 
-const RootStack = createStackNavigator(
-  {
-    Tab: TabStack,
-    MyModal: ModalScreen
+//const RootStack = createStackNavigator(
+//   {
+//     Tab: TabStack,
+//     MyModal: ModalScreen
+//   },
+//   {
+//     mode: "modal",
+//     headerMode: "none"
+//   }
+// );
+
+const DrawerStack = createDrawerNavigator({
+  Drawer: {
+    screen: TabStack,
+    navigationOptions: { drawerLabel: "Home" }
   },
-  {
-    mode: "modal",
-    headerMode: "none"
+  Nofitications: {
+    screen: NotificationScreen
+  },
+  MyModal: {
+    screen: ModalScreen,
+    navigationOptions: {
+      drawerLabel: "Exibir Modal"
+    }
   }
-);
+});
 
-const AppContainer = createAppContainer(RootStack);
-
+const AppContainer = createAppContainer(DrawerStack);
+DrawerStack;
 export default AppContainer;

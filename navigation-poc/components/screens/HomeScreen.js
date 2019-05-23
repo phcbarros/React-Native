@@ -43,6 +43,17 @@ class HomeScreen extends React.Component {
     );
   }
 
+  renderButtonOpenDrawer() {
+    return (
+      <View style={styles.buttonContainer}>
+        <Button
+          title="Show Drawer"
+          onPress={() => this.props.navigation.openDrawer()}
+        />
+      </View>
+    );
+  }
+
   render() {
     /* 1. Navigate to the Details route with params */
     return (
@@ -51,6 +62,7 @@ class HomeScreen extends React.Component {
         <Text>Count: {this.state.count}</Text>
         {this.renderButttonGoToDetails()}
         {this.renderButtonGoToSettings()}
+        {this.renderButtonOpenDrawer()}
       </View>
     );
   }
