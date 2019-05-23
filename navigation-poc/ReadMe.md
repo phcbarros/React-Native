@@ -201,7 +201,7 @@ const TabNavigator = createBottomTabNavigator({
 export default createAppContainer(TabNavigator);
 ```
 
-Usando tabNavigation com stackNavigation e configurando os ícones para cada aba.
+Usando tabNavigation com stackNavigation e configurando os ícones para cada aba.q
 
 ```javascript
 const MainStacK = createStackNavigator({
