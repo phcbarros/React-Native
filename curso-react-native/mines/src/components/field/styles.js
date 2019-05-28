@@ -28,4 +28,5 @@ export default StyleSheet.create({
     backgroundColor: 'red',
     borderColor: 'red',
   },
+  flagged: {},
 })
