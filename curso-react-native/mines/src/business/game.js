@@ -4,10 +4,10 @@ const createBoard = (rows, cols) => {
     .map((_, row) => {
       return Array(cols)
         .fill(0)
-        .map((_, col) => {
+        .map((_, column) => {
           return {
             row,
-            col,
+            column,
             mined: false,
             opened: false,
             flagged: false,
@@ -55,7 +55,7 @@ const getNeighbors = (board, row, column) => {
 
   rows.forEach((r) => {
     cols.forEach((c) => {
-      const different = r !== row && c !== column
+      const different = r !== row || c !== column
       const validRow = r >= 0 && r < board.length
       const validColumn = c >= 0 && c < board[0].length
 
@@ -84,15 +84,16 @@ const openField = (board, row, column) => {
         openField(board, n.row, n.column),
       )
     } else {
-      const neighbors = getNeighbors(boar, row, column)
+      const neighbors = getNeighbors(board, row, column)
       field.nearMines = neighbors.filter((n) => n.mined).length
     }
   }
 }
 
 const fields = (board) => [].concat(...board)
+
 const hasExplosion = (board) =>
-  fields(board).filter((n) => n.exploded).length > 0
+  fields(board).filter((field) => field.exploded).length > 0
 
 const pendding = (field) =>
   (field.mined && !field.flagged) || (!field.mined && !field.opened)
