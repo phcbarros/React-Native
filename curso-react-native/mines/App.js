@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react'
+import React, { Component } from 'react'
 import { StyleSheet, Text, View, Alert } from 'react-native'
 import params from './src/configurations/configuration'
 import MineField from './src/components/mine-field/MineField'
@@ -9,6 +9,7 @@ import {
   hasExplosion,
   wonGame,
   showMines,
+  invertFlag,
 } from './src/business/game'
 
 export default class App extends Component {
@@ -52,6 +53,19 @@ export default class App extends Component {
     this.setState({ board, won, lost })
   }
 
+  onSelectField = (row, column) => {
+    const board = cloneBoard(this.state.board)
+    invertFlag(board, row, column)
+
+    const won = wonGame(board)
+
+    if (won) {
+      Alert.alert('Parabéns!!! Você venceu!!!')
+    }
+
+    this.setState({ board, won })
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -60,7 +74,11 @@ export default class App extends Component {
           Tamanho da grade: {params.getRowsAmount()}x{params.getColumnsAmount()}
         </Text>
         <View style={styles.board}>
-          <MineField board={this.state.board} onOpenField={this.onOpenField} />
+          <MineField
+            board={this.state.board}
+            onOpenField={this.onOpenField}
+            onSelectField={this.onSelectField}
+          />
         </View>
       </View>
     )
