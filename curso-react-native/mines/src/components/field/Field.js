@@ -1,8 +1,8 @@
 import React from 'react'
-import { View, StyleSheet, Text } from 'react-native'
+import { View, Text } from 'react-native'
 import styles from './styles'
-import Mine from './mine/Mine'
-import Flag from './flag/Flag'
+import Mine from '../mine/Mine'
+import Flag from '../flag/Flag'
 
 export default (props) => {
   const { mined, opened, nearMines, exploded, flagged } = props
