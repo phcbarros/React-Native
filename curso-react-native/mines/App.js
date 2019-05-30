@@ -31,7 +31,9 @@ export default class App extends Component {
         <Text style={styles.instructions}>
           Tamanho da grade: {params.getRowsAmount()}x{params.getColumnsAmount()}
         </Text>
-        <MineField board={this.state.board} />
+        <View style={styles.board}>
+          <MineField board={this.state.board} />
+        </View>
       </View>
     )
   }
