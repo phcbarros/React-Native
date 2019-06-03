@@ -15,7 +15,7 @@ export default (props) => {
       </View>
     )
   } else {
-    ;<View style={styles.pending} />
+    check = <View style={styles.pending} />
   }
 
   const descStyle = props.doneAt ? { textDecorationLine: 'line-through' } : {}
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     height: 25,
     width: 25,
-    borderRadius: 5,
+    borderRadius: 15,
     borderColor: '#555',
   },
   done: {
