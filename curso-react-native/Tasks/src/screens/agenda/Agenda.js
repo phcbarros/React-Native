@@ -1,9 +1,10 @@
-import React from "react";
-import { StyleSheet, Text, View, ImageBackground } from "react-native";
-import moment from "moment";
-import "moment/locale/pt-br";
-import todayImage from "../../../assets/imgs/today.jpg";
-import commonStyles from "../../resources/commonStyles";
+import React from 'react'
+import { StyleSheet, Text, View, ImageBackground } from 'react-native'
+import moment from 'moment'
+import 'moment/locale/pt-br'
+import todayImage from '../../../assets/imgs/today.jpg'
+import commonStyles from '../../resources/commonStyles'
+import Task from '../../components/task/Task'
 
 export default class Agenda extends React.Component {
   render() {
@@ -14,47 +15,98 @@ export default class Agenda extends React.Component {
             <Text style={styles.title}>Hoje</Text>
             <Text style={styles.subtitle}>
               {moment()
-                .locale("pt-br")
-                .format("ddd, D [de] MMMM")}
+                .locale('pt-br')
+                .format('ddd, D [de] MMMM')}
             </Text>
           </View>
         </ImageBackground>
         <View style={styles.tasksContainer}>
-          <Text>Tarefa 1</Text>
-          <Text>Tarefa 2</Text>
-          <Text>Tarefa 3</Text>
+          <Task desc="Tarefa pendente" estimatedAt={new Date()} doneAt={null} />
+          <Task
+            desc="Tarefa concluída"
+            estimatedAt={new Date()}
+            doneAt={new Date()}
+          />
+          <Task desc="Tarefa pendente" estimatedAt={new Date()} doneAt={null} />
+          <Task
+            desc="Tarefa concluída"
+            estimatedAt={new Date()}
+            doneAt={new Date()}
+          />
+          <Task desc="Tarefa pendente" estimatedAt={new Date()} doneAt={null} />
+          <Task
+            desc="Tarefa concluída"
+            estimatedAt={new Date()}
+            doneAt={new Date()}
+          />
+          <Task desc="Tarefa pendente" estimatedAt={new Date()} doneAt={null} />
+          <Task
+            desc="Tarefa concluída"
+            estimatedAt={new Date()}
+            doneAt={new Date()}
+          />
+          <Task desc="Tarefa pendente" estimatedAt={new Date()} doneAt={null} />
+          <Task
+            desc="Tarefa concluída"
+            estimatedAt={new Date()}
+            doneAt={new Date()}
+          />
+          <Task desc="Tarefa pendente" estimatedAt={new Date()} doneAt={null} />
+          <Task
+            desc="Tarefa concluída"
+            estimatedAt={new Date()}
+            doneAt={new Date()}
+          />
+          <Task desc="Tarefa pendente" estimatedAt={new Date()} doneAt={null} />
+          <Task
+            desc="Tarefa concluída"
+            estimatedAt={new Date()}
+            doneAt={new Date()}
+          />
+          <Task desc="Tarefa pendente" estimatedAt={new Date()} doneAt={null} />
+          <Task
+            desc="Tarefa concluída"
+            estimatedAt={new Date()}
+            doneAt={new Date()}
+          />
+          <Task desc="Tarefa pendente" estimatedAt={new Date()} doneAt={null} />
+          <Task
+            desc="Tarefa concluída"
+            estimatedAt={new Date()}
+            doneAt={new Date()}
+          />
         </View>
       </View>
-    );
+    )
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   background: {
-    flex: 3
+    flex: 3,
   },
   titleBar: {
     flex: 1,
-    justifyContent: "flex-end"
+    justifyContent: 'flex-end',
   },
   title: {
     fontFamily: commonStyles.fontFamily,
     color: commonStyles.colors.secondary,
     fontSize: 50,
     marginLeft: 20,
-    marginBottom: 10
+    marginBottom: 10,
   },
   subtitle: {
     fontFamily: commonStyles.fontFamily,
     color: commonStyles.colors.secondary,
     fontSize: 20,
     marginLeft: 20,
-    marginBottom: 30
+    marginBottom: 30,
   },
   tasksContainer: {
-    flex: 7
-  }
-});
+    flex: 7,
+  },
+})
