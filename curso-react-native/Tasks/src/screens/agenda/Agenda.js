@@ -72,7 +72,7 @@ export default class Agenda extends React.Component {
     this.setState({ tasks }, this.filterTasks)
   }
 
-  addTasks = (task) => {
+  addTask = (task) => {
     Alert.alert(task.desc, task.date.toString())
     const tasks = [...this.state.tasks] //sempre clonar
     tasks.push({
@@ -81,8 +81,12 @@ export default class Agenda extends React.Component {
       estimateAt: task.date,
       doneAt: null,
     })
-
     this.setState({ tasks, showAddTask: false }, this.filterTasks)
+  }
+
+  deleteTask = (id) => {
+    const tasks = this.state.tasks.filter((task) => task.id !== id)
+    this.setState({ tasks }, this.filterTasks)
   }
 
   render() {
@@ -90,7 +94,7 @@ export default class Agenda extends React.Component {
       <View style={styles.container}>
         <CreateTask
           isVisible={this.state.showAddTask}
-          onSave={this.addTasks}
+          onSave={this.addTask}
           onCancel={() => this.setState({ showAddTask: false })}
         />
         <ImageBackground source={todayImage} style={styles.background}>
@@ -117,7 +121,11 @@ export default class Agenda extends React.Component {
             data={this.state.visibleTasks}
             keyExtractor={(item) => `${item.id}`}
             renderItem={({ item }) => (
-              <Task {...item} toggleTask={this.toggleTask} />
+              <Task
+                {...item}
+                onToggleTask={this.toggleTask}
+                onDelete={this.deleteTask}
+              />
             )}
           />
         </View>
