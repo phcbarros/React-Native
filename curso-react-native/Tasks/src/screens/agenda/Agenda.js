@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Platform,
   Alert,
+  AsyncStorage,
 } from 'react-native'
 import moment from 'moment'
 import 'moment/locale/pt-br'
@@ -18,29 +19,20 @@ import CreateTask from '../create-task/CreateTask'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import ActionButton from 'react-native-action-button'
 
+const TASKS = 'tasks'
+
 export default class Agenda extends React.Component {
   state = {
-    tasks: [
-      {
-        id: Math.random(),
-        desc: 'Tarefa pendente',
-        estimateAt: new Date(),
-        doneAt: null,
-      },
-      {
-        id: Math.random(),
-        desc: 'Tarefa concluída',
-        estimateAt: new Date(),
-        doneAt: new Date(),
-      },
-    ],
+    tasks: [],
     visibleTasks: [],
     showDoneTasks: true,
     showAddTask: false,
   }
 
-  componentDidMount = () => {
-    this.filterTasks()
+  componentDidMount = async () => {
+    const data = await AsyncStorage.getItem(TASKS)
+    const tasks = JSON.parse(data) || []
+    this.setState({ tasks }, this.filterTasks)
   }
 
   filterTasks = () => {
@@ -52,6 +44,7 @@ export default class Agenda extends React.Component {
       visibleTasks = this.state.tasks.filter(pending)
     }
     this.setState({ visibleTasks })
+    AsyncStorage.setItem(TASKS, JSON.stringify(this.state.tasks))
   }
 
   toggleFilter = () => {
@@ -73,7 +66,6 @@ export default class Agenda extends React.Component {
   }
 
   addTask = (task) => {
-    Alert.alert(task.desc, task.date.toString())
     const tasks = [...this.state.tasks] //sempre clonar
     tasks.push({
       id: Math.random(),

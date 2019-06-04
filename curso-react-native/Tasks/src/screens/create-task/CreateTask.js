@@ -62,7 +62,6 @@ export default class CreateTask extends React.Component {
 
   render() {
     let datePicker = null
-
     if (Platform.OS === 'ios') {
       datePicker = (
         <DatePickerIOS
