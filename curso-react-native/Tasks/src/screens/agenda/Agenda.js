@@ -13,7 +13,9 @@ import 'moment/locale/pt-br'
 import todayImage from '../../../assets/imgs/today.jpg'
 import commonStyles from '../../resources/commonStyles'
 import Task from '../../components/task/Task'
+import CreateTask from '../create-task/CreateTask'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import ActionButton from 'react-native-action-button'
 
 export default class Agenda extends React.Component {
   state = {
@@ -129,6 +131,7 @@ export default class Agenda extends React.Component {
     ],
     visibleTasks: [],
     showDoneTasks: true,
+    showAddTask: false,
   }
 
   componentDidMount = () => {
@@ -143,7 +146,6 @@ export default class Agenda extends React.Component {
       const pending = (task) => task.doneAt === null
       visibleTasks = this.state.tasks.filter(pending)
     }
-    console.log(visibleTasks)
     this.setState({ visibleTasks })
   }
 
@@ -165,9 +167,26 @@ export default class Agenda extends React.Component {
     this.setState({ tasks }, this.filterTasks)
   }
 
+  addTasks = (task) => {
+    const tasks = [...this.state.tasks] //sempre clonar
+    tasks.push({
+      id: Math.random(),
+      desc: task.desc,
+      estimateAt: task.date,
+      doneAt: null,
+    })
+
+    this.setState({ tasks, showAddTask: false }, this.filterTasks)
+  }
+
   render() {
     return (
       <View style={styles.container}>
+        <CreateTask
+          isVisible={this.state.showAddTask}
+          onSave={this.addTasks}
+          onCancel={() => this.setState({ showAddTask: false })}
+        />
         <ImageBackground source={todayImage} style={styles.background}>
           <View style={styles.iconBar}>
             <TouchableOpacity onPress={this.toggleFilter}>
@@ -196,6 +215,10 @@ export default class Agenda extends React.Component {
             )}
           />
         </View>
+        <ActionButton
+          buttonColor={commonStyles.colors.today}
+          onPress={() => this.setState({ showAddTask: true })}
+        />
       </View>
     )
   }
