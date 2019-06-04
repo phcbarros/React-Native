@@ -7,6 +7,7 @@ import {
   FlatList,
   TouchableOpacity,
   Platform,
+  Alert,
 } from 'react-native'
 import moment from 'moment'
 import 'moment/locale/pt-br'
@@ -20,102 +21,6 @@ import ActionButton from 'react-native-action-button'
 export default class Agenda extends React.Component {
   state = {
     tasks: [
-      {
-        id: Math.random(),
-        desc: 'Tarefa pendente',
-        estimateAt: new Date(),
-        doneAt: null,
-      },
-      {
-        id: Math.random(),
-        desc: 'Tarefa concluída',
-        estimateAt: new Date(),
-        doneAt: new Date(),
-      },
-      {
-        id: Math.random(),
-        desc: 'Tarefa pendente',
-        estimateAt: new Date(),
-        doneAt: null,
-      },
-      {
-        id: Math.random(),
-        desc: 'Tarefa concluída',
-        estimateAt: new Date(),
-        doneAt: new Date(),
-      },
-      {
-        id: Math.random(),
-        desc: 'Tarefa pendente',
-        estimateAt: new Date(),
-        doneAt: null,
-      },
-      {
-        id: Math.random(),
-        desc: 'Tarefa concluída',
-        estimateAt: new Date(),
-        doneAt: new Date(),
-      },
-      {
-        id: Math.random(),
-        desc: 'Tarefa pendente',
-        estimateAt: new Date(),
-        doneAt: null,
-      },
-      {
-        id: Math.random(),
-        desc: 'Tarefa concluída',
-        estimateAt: new Date(),
-        doneAt: new Date(),
-      },
-      {
-        id: Math.random(),
-        desc: 'Tarefa pendente',
-        estimateAt: new Date(),
-        doneAt: null,
-      },
-      {
-        id: Math.random(),
-        desc: 'Tarefa concluída',
-        estimateAt: new Date(),
-        doneAt: new Date(),
-      },
-      {
-        id: Math.random(),
-        desc: 'Tarefa pendente',
-        estimateAt: new Date(),
-        doneAt: null,
-      },
-      {
-        id: Math.random(),
-        desc: 'Tarefa concluída',
-        estimateAt: new Date(),
-        doneAt: new Date(),
-      },
-      {
-        id: Math.random(),
-        desc: 'Tarefa pendente',
-        estimateAt: new Date(),
-        doneAt: null,
-      },
-      {
-        id: Math.random(),
-        desc: 'Tarefa concluída',
-        estimateAt: new Date(),
-        doneAt: new Date(),
-      },
-      {
-        id: Math.random(),
-        desc: 'Tarefa pendente',
-        estimateAt: new Date(),
-        doneAt: null,
-      },
-      {
-        id: Math.random(),
-        desc: 'Tarefa concluída',
-        estimateAt: new Date(),
-        doneAt: new Date(),
-      },
       {
         id: Math.random(),
         desc: 'Tarefa pendente',
@@ -168,6 +73,7 @@ export default class Agenda extends React.Component {
   }
 
   addTasks = (task) => {
+    Alert.alert(task.desc, task.date.toString())
     const tasks = [...this.state.tasks] //sempre clonar
     tasks.push({
       id: Math.random(),
