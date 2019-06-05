@@ -9,21 +9,21 @@ module.exports = (app) => {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   }
 
-  const strategy = new Strategy(params, (payload, done) => {
-    app
-      .db('users')
-      .where({ id: payload.id })
-      .first()
-      .then((user) => {
-        if (user) {
-          done(null, { id: user.id, email: user.email })
-        } else {
-          done(null, false)
-        }
-      })
-      .catch((err) => {
-        done(err, false)
-      })
+  const strategy = new Strategy(params, async (payload, done) => {
+    try {
+      const user = await app
+        .db('users')
+        .where({ id: payload.id })
+        .first()
+
+      if (user) {
+        done(null, { id: user.id, email: user.email })
+      } else {
+        done(null, false)
+      }
+    } catch (err) {
+      done(err, false)
+    }
   })
 
   passport.use(strategy)
