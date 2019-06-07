@@ -1,6 +1,59 @@
-import { createSwitchNavigator, createAppContainer } from 'react-navigation'
+import React from 'react'
+import {
+  createSwitchNavigator,
+  createDrawerNavigator,
+  createAppContainer,
+} from 'react-navigation'
 import Agenda from '../screens/agenda/Agenda'
 import Auth from '../screens/auth/Auth'
+import commonStyles from '../resources/commonStyles'
+
+const menuRoutes = {
+  Today: {
+    name: 'Today',
+    screen: (props) => <Agenda title="Hoje" daysAHead={0} {...props} />,
+    navigationOptions: {
+      title: 'Hoje',
+    },
+  },
+  Tomorrow: {
+    name: 'Tomorrow',
+    screen: (props) => <Agenda title="Amanhã" daysAHead={1} {...props} />,
+    navigationOptions: {
+      title: 'Amanhã',
+    },
+  },
+  Week: {
+    name: 'Week',
+    screen: (props) => <Agenda title="Semana" daysAHead={7} {...props} />,
+    navigationOptions: {
+      title: 'Semana',
+    },
+  },
+  Month: {
+    name: 'Month',
+    screen: (props) => <Agenda title="Mês" daysAHead={30} {...props} />,
+    navigationOptions: {
+      title: 'Mês',
+    },
+  },
+}
+
+const menuConfig = {
+  initialRouteName: 'Today',
+  contentOptions: {
+    labelStyle: {
+      fontFamily: commonStyles.fontFamily,
+      fontWheight: 'normal',
+      fontSize: 20,
+    },
+    activeLabelStyle: {
+      color: '#080',
+    },
+  },
+}
+
+const menuNavigator = createDrawerNavigator(menuRoutes, menuConfig)
 
 const mainRoutes = {
   Auth: {
@@ -9,12 +62,12 @@ const mainRoutes = {
   },
   Home: {
     name: 'Home',
-    screen: Agenda,
+    screen: menuNavigator,
   },
 }
 
-const MainNavigator = createSwitchNavigator(mainRoutes, {
+const mainNavigator = createSwitchNavigator(mainRoutes, {
   initialRouteName: 'Auth',
 })
 
-export default createAppContainer(MainNavigator)
+export default createAppContainer(mainNavigator)
