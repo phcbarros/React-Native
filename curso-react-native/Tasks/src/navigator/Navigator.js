@@ -46,7 +46,7 @@ const menuConfig = {
   contentOptions: {
     labelStyle: {
       fontFamily: commonStyles.fontFamily,
-      fontWheight: 'normal',
+      fontWeight: 'normal',
       fontSize: 20,
     },
     activeLabelStyle: {
