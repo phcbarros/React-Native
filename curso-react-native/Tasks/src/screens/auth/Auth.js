@@ -48,7 +48,7 @@ export default class Auth extends React.Component {
       axios.defaults.headers.common['Authorization'] = `bearer ${
         res.data.token
       }`
-      this.props.navigation.navigate('Home')
+      this.props.navigation.navigate('Home', res.data)
     } catch (err) {
       console.log(err)
       Alert.alert('Erro', 'Falha ao logar!')

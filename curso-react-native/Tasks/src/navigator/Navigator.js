@@ -6,6 +6,7 @@ import {
 } from 'react-navigation'
 import Agenda from '../screens/agenda/Agenda'
 import Auth from '../screens/auth/Auth'
+import Menu from '../screens/menu/Menu'
 import commonStyles from '../resources/commonStyles'
 
 const menuRoutes = {
@@ -41,6 +42,7 @@ const menuRoutes = {
 
 const menuConfig = {
   initialRouteName: 'Today',
+  contentComponent: Menu,
   contentOptions: {
     labelStyle: {
       fontFamily: commonStyles.fontFamily,
