@@ -15,10 +15,18 @@ import {
 import commonStyles from '../../resources/commonStyles'
 import moment from 'moment'
 
-const initialState = { desc: '', date: new Date() }
-
 export default class CreateTask extends React.Component {
-  state = { ...initialState }
+  constructor(props) {
+    super(props)
+    this.state = this.getInitialState()
+  }
+
+  getInitialState = () => {
+    return {
+      desc: '',
+      date: new Date(),
+    }
+  }
 
   save = () => {
     if (!this.state.desc.trim()) {
@@ -27,7 +35,6 @@ export default class CreateTask extends React.Component {
     }
     const data = { ...this.state }
     this.props.onSave(data)
-    this.setState({ ...initialState })
   }
 
   handleDateAndroidChanged = async () => {
@@ -56,7 +63,7 @@ export default class CreateTask extends React.Component {
       }
     } catch ({ code, message }) {
       console.warn('Cannot open date picker', message)
-      Alert.alert('Error', 'Não foi possível abrir o date picker')
+      Alert.alert('Erro', 'Não foi possível abrir o date picker')
     }
   }
 
@@ -85,7 +92,8 @@ export default class CreateTask extends React.Component {
         onRequestClose={this.props.onCancel}
         visible={this.props.isVisible}
         animationType="slide"
-        transparent={true}>
+        transparent={true}
+        onShow={() => this.setState({ ...this.getInitialState() })}>
         <ButtonBackground onCancel={this.props.onCancel} />
         <View style={styles.container}>
           <Text style={styles.header}>Nova Tarefa!</Text>
