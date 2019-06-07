@@ -7,7 +7,6 @@ import {
   FlatList,
   TouchableOpacity,
   Platform,
-  Alert,
   AsyncStorage,
 } from 'react-native'
 import moment from 'moment'
@@ -18,6 +17,8 @@ import Task from '../../components/task/Task'
 import CreateTask from '../create-task/CreateTask'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import ActionButton from 'react-native-action-button'
+import axios from 'axios'
+import { server, showError } from '../../config/common'
 
 const TASKS = 'tasks'
 
@@ -30,9 +31,17 @@ export default class Agenda extends React.Component {
   }
 
   componentDidMount = async () => {
-    const data = await AsyncStorage.getItem(TASKS)
-    const tasks = JSON.parse(data) || []
-    this.setState({ tasks }, this.filterTasks)
+    this.loadTasks()
+  }
+
+  loadTasks = async () => {
+    try {
+      const maxDate = moment().format('YYYY-MM-DD 23:59')
+      const res = await axios.get(`${server}/tasks?date=${maxDate}`)
+      this.setState({ tasks: res.data }, this.filterTasks)
+    } catch (err) {
+      showError(err)
+    }
   }
 
   filterTasks = () => {
@@ -54,31 +63,37 @@ export default class Agenda extends React.Component {
     )
   }
 
-  toggleTask = (id) => {
-    const tasks = this.state.tasks.map((task) => {
-      if (task.id === id) {
-        task = { ...task }
-        task.doneAt = task.doneAt = task.doneAt ? null : new Date()
-      }
-      return task
-    })
-    this.setState({ tasks }, this.filterTasks)
+  toggleTask = async (id) => {
+    try {
+      await axios.put(`${server}/tasks/${id}/toggle`)
+      await this.loadTasks()
+    } catch (err) {
+      showError(err)
+    }
   }
 
-  addTask = (task) => {
-    const tasks = [...this.state.tasks] //sempre clonar
-    tasks.push({
-      id: Math.random(),
-      desc: task.desc,
-      estimateAt: task.date,
-      doneAt: null,
-    })
-    this.setState({ tasks, showAddTask: false }, this.filterTasks)
+  addTask = async (task) => {
+    try {
+      await axios.post(`${server}/tasks`, {
+        desc: task.desc,
+        estimateAt: task.date,
+      })
+
+      this.setState({ showAddTask: false }, this.loadTasks)
+    } catch (err) {
+      showError(err)
+    }
   }
 
-  deleteTask = (id) => {
-    const tasks = this.state.tasks.filter((task) => task.id !== id)
-    this.setState({ tasks }, this.filterTasks)
+  deleteTask = async (id) => {
+    try {
+      await axios.delete(`${server}/tasks/${id}`)
+      //await this.loadTasks()
+      const tasks = this.state.tasks.filter((task) => task.id !== id)
+      this.setState({ tasks }, this.filterTasks)
+    } catch (err) {
+      showError(err)
+    }
   }
 
   render() {
