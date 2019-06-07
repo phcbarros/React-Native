@@ -8,6 +8,8 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native'
+import axios from 'axios'
+import { server, showError } from '../../config/common'
 import AuthInput from '../../components/input/Input'
 import commonStyles from '../../resources/commonStyles'
 import backgroundImage from '../../../assets/imgs/login.jpg'
@@ -21,11 +23,36 @@ export default class Auth extends React.Component {
     confirmPassword: '',
   }
 
-  singinOrSignup = () => {
+  singinOrSignup = async () => {
+    const { name, email, password, confirmPassword } = this.state
     if (this.state.stageNew) {
-      Alert.alert('Sucesso', 'Criar conta')
+      try {
+        await axios.post(`${server}/signup`, {
+          name,
+          email,
+          password,
+          confirmPassword,
+        })
+        Alert.alert('Sucesso', 'Usuário cadastrado!')
+        this.setState({ stageNew: false })
+      } catch (err) {
+        showError(err)
+      }
     } else {
-      Alert.alert('Sucesso', 'Logar')
+      try {
+        const res = await axios.post(`${server}/signin`, {
+          email,
+          password,
+        })
+        console.log(res)
+        axios.defaults.headers.common['Authorization'] = `bearer ${
+          res.data.token
+        }`
+        this.props.navigation.navigate('Home')
+      } catch (err) {
+        console.log(err)
+        Alert.alert('Erro', 'Falha ao logar!')
+      }
     }
   }
 
@@ -48,6 +75,7 @@ export default class Auth extends React.Component {
           )}
           <AuthInput
             icon="at"
+            autoCapitalize="none"
             placeholder="E-mail"
             style={styles.input}
             value={this.state.email}
@@ -61,16 +89,18 @@ export default class Auth extends React.Component {
             value={this.state.password}
             onChangeText={(password) => this.setState({ password })}
           />
-          <AuthInput
-            icon="asterisk"
-            secureTextEntry={true}
-            placeholder="Confirmar Senha"
-            style={styles.input}
-            value={this.state.confirmPassword}
-            onChangeText={(confirmPassword) =>
-              this.setState({ confirmPassword })
-            }
-          />
+          {this.state.stageNew && (
+            <AuthInput
+              icon="asterisk"
+              secureTextEntry={true}
+              placeholder="Confirmar Senha"
+              style={styles.input}
+              value={this.state.confirmPassword}
+              onChangeText={(confirmPassword) =>
+                this.setState({ confirmPassword })
+              }
+            />
+          )}
           <TouchableOpacity onPress={this.singinOrSignup}>
             <View style={styles.button}>
               <Text style={styles.buttonText}>
