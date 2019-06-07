@@ -4,7 +4,6 @@ import {
   Alert,
   ImageBackground,
   Text,
-  TextInput,
   View,
   TouchableOpacity,
 } from 'react-native'
@@ -23,40 +22,62 @@ export default class Auth extends React.Component {
     confirmPassword: '',
   }
 
-  singinOrSignup = async () => {
+  signup = async () => {
     const { name, email, password, confirmPassword } = this.state
+    try {
+      await axios.post(`${server}/signup`, {
+        name,
+        email,
+        password,
+        confirmPassword,
+      })
+      Alert.alert('Sucesso', 'Usuário cadastrado!')
+      this.setState({ stageNew: false })
+    } catch (err) {
+      showError(err)
+    }
+  }
+
+  signin = async () => {
+    const { email, password } = this.state
+    try {
+      const res = await axios.post(`${server}/signin`, {
+        email,
+        password,
+      })
+      axios.defaults.headers.common['Authorization'] = `bearer ${
+        res.data.token
+      }`
+      this.props.navigation.navigate('Home')
+    } catch (err) {
+      console.log(err)
+      Alert.alert('Erro', 'Falha ao logar!')
+    }
+  }
+
+  signinOrSignup = async () => {
     if (this.state.stageNew) {
-      try {
-        await axios.post(`${server}/signup`, {
-          name,
-          email,
-          password,
-          confirmPassword,
-        })
-        Alert.alert('Sucesso', 'Usuário cadastrado!')
-        this.setState({ stageNew: false })
-      } catch (err) {
-        showError(err)
-      }
+      this.signup()
     } else {
-      try {
-        const res = await axios.post(`${server}/signin`, {
-          email,
-          password,
-        })
-        console.log(res)
-        axios.defaults.headers.common['Authorization'] = `bearer ${
-          res.data.token
-        }`
-        this.props.navigation.navigate('Home')
-      } catch (err) {
-        console.log(err)
-        Alert.alert('Erro', 'Falha ao logar!')
-      }
+      this.signin()
     }
   }
 
   render() {
+    const { name, email, password, confirmPassword, stageNew } = this.state
+    const validations = []
+
+    validations.push(email && email.trim() && email.includes('@'))
+    validations.push(password && password.trim() && password.length >= 6)
+
+    if (stageNew) {
+      validations.push(name && name.trim())
+      validations.push(confirmPassword)
+      validations.push(password === confirmPassword)
+    }
+
+    const formValid = validations.reduce((all, v) => all && v)
+
     return (
       <ImageBackground source={backgroundImage} style={styles.background}>
         <Text style={styles.title}>Tasks</Text>
@@ -101,8 +122,12 @@ export default class Auth extends React.Component {
               }
             />
           )}
-          <TouchableOpacity onPress={this.singinOrSignup}>
-            <View style={styles.button}>
+          <TouchableOpacity disabled={!formValid} onPress={this.signinOrSignup}>
+            <View
+              style={[
+                styles.button,
+                !formValid ? { backgroundColor: '#AAA' } : null,
+              ]}>
               <Text style={styles.buttonText}>
                 {this.state.stageNew ? 'Registrar' : 'Entrar'}
               </Text>
