@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View, Platform, Image } from 'react-native'
-import icon from '../../../assets/imgs/icon.png'
+import icon from '../../assets/imgs/icon.png'
 
 class Header extends React.Component {
   render() {
