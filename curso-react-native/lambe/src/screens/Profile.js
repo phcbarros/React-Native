@@ -4,7 +4,9 @@ import { Gravatar } from 'react-native-gravatar'
 import CustomButton from '../components/CustomButton'
 
 class Profile extends React.Component {
-  logout = () => {}
+  logout = () => {
+    this.props.navigation.navigate('Auth')
+  }
 
   render() {
     const options = { email: 'phcbcontato@outlook.com', secure: true }
@@ -14,7 +16,7 @@ class Profile extends React.Component {
         <Gravatar options={options} style={styles.avatar} />
         <Text style={styles.nickname}>Paulo Barros</Text>
         <Text style={styles.email}>email@teste.com.br</Text>
-        <CustomButton onClick={this.logout} label="Sair" />
+        <CustomButton onPress={this.logout} label="Sair" />
       </View>
     )
   }

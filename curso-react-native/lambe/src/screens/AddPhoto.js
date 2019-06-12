@@ -47,14 +47,14 @@ class AddPhoto extends React.Component {
           <View style={styles.imageContainer}>
             <Image source={this.state.image} style={styles.image} />
           </View>
-          <CustomButton onClick={this.pickImage} label="Escolha a foto" />
+          <CustomButton onPress={this.pickImage} label="Escolha a foto" />
           <TextInput
             placeholder="Algum comentário para a foto?"
             style={styles.input}
             value={this.state.comment}
             onChangeText={(comment) => this.setState({ comment })}
           />
-          <CustomButton onClick={this.save} label="Salvar" />
+          <CustomButton onPress={this.save} label="Salvar" />
         </View>
       </ScrollView>
     )
