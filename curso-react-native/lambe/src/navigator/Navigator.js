@@ -1,7 +1,7 @@
 import React from 'react'
 import { createBottomTabNavigator, createAppContainer } from 'react-navigation'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import { Feed, AddPhoto } from '../screens'
+import { Feed, AddPhoto, Profile } from '../screens'
 
 const MenuRoutes = {
   Feed: {
@@ -26,7 +26,7 @@ const MenuRoutes = {
   },
   Profile: {
     name: 'Profile',
-    screen: Feed,
+    screen: Profile,
     navigationOptions: {
       title: 'Profile',
       tabBarIcon: ({ tintColor }) => (

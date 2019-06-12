@@ -3,7 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity,
   TextInput,
   Image,
   Dimensions,
@@ -12,6 +11,7 @@ import {
   Alert,
 } from 'react-native'
 import ImagePicker from 'react-native-image-picker'
+import CustomButton from '../components/CustomButton'
 
 class AddPhoto extends React.Component {
   state = {
@@ -47,18 +47,14 @@ class AddPhoto extends React.Component {
           <View style={styles.imageContainer}>
             <Image source={this.state.image} style={styles.image} />
           </View>
-          <TouchableOpacity onPress={this.pickImage} style={styles.button}>
-            <Text style={styles.buttonText}>Escolha a foto</Text>
-          </TouchableOpacity>
+          <CustomButton onClick={this.pickImage} label="Escolha a foto" />
           <TextInput
             placeholder="Algum comentário para a foto?"
             style={styles.input}
             value={this.state.comment}
             onChangeText={(comment) => this.setState({ comment })}
           />
-          <TouchableOpacity onPress={this.save} style={styles.button}>
-            <Text style={styles.buttonText}>Salvar</Text>
-          </TouchableOpacity>
+          <CustomButton onClick={this.save} label="Salvar" />
         </View>
       </ScrollView>
     )
@@ -85,15 +81,6 @@ const styles = StyleSheet.create({
     width: '100%',
     height: Dimensions.get('window').width / 2,
     resizeMode: 'center',
-  },
-  button: {
-    marginTop: 30,
-    padding: 10,
-    backgroundColor: '#4286f4',
-  },
-  buttonText: {
-    fontSize: 20,
-    color: '#FFF',
   },
   input: {
     marginTop: 20,
