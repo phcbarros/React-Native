@@ -1,21 +1,26 @@
 import React from 'React'
 import { StyleSheet, Text, View } from 'react-native'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import { Gravatar } from 'react-native-gravatar'
 import CustomButton from '../components/CustomButton'
+import { logout } from '../store/actions/user'
 
 class Profile extends React.Component {
   logout = () => {
+    this.props.onLogout()
     this.props.navigation.navigate('Auth')
   }
 
   render() {
-    const options = { email: 'phcbcontato@outlook.com', secure: true }
+    const { name, email } = this.props
+    const options = { email: email, secure: true }
 
     return (
       <View style={styles.container}>
         <Gravatar options={options} style={styles.avatar} />
-        <Text style={styles.nickname}>Paulo Barros</Text>
-        <Text style={styles.email}>email@teste.com.br</Text>
+        <Text style={styles.nickname}>{name}</Text>
+        <Text style={styles.email}>{email}</Text>
         <CustomButton onPress={this.logout} label="Sair" />
       </View>
     )
@@ -53,4 +58,11 @@ const styles = StyleSheet.create({
   },
 })
 
-export default Profile
+const mapStateToProps = ({ user }) => ({ name: user.name, email: user.email })
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators({ onLogout: logout }, dispatch)
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Profile)
