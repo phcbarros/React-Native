@@ -1,17 +1,11 @@
 import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
-import { Gravatar } from 'react-native-gravatar'
+import Avatar from './Avatar'
 
 export default (props) => {
   return (
     <View style={styles.container}>
-      <Gravatar
-        style={styles.avatar}
-        options={{
-          email: props.email,
-          secure: true,
-        }}
-      />
+      <Avatar email={props.email} style={styles.avatar} />
       <Text style={styles.nickname}>{props.nickname}</Text>
     </View>
   )
@@ -23,9 +17,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   avatar: {
-    width: 30,
-    height: 30,
-    borderRadius: 15,
     marginHorizontal: 15,
   },
   nickname: {

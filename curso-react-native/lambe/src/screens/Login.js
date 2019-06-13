@@ -21,6 +21,7 @@ class Login extends React.Component {
     return (
       <View style={styles.container}>
         <CustomInput
+          autoCapitalize="none"
           placeholder="E-mail"
           autoFocus={true}
           keyboardType="email-address"

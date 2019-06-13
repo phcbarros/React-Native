@@ -2,8 +2,8 @@ import React from 'React'
 import { StyleSheet, Text, View } from 'react-native'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Gravatar } from 'react-native-gravatar'
 import CustomButton from '../components/CustomButton'
+import Avatar from '../components/Avatar'
 import { logout } from '../store/actions/user'
 
 class Profile extends React.Component {
@@ -14,11 +14,10 @@ class Profile extends React.Component {
 
   render() {
     const { name, email } = this.props
-    const options = { email: email, secure: true }
 
     return (
       <View style={styles.container}>
-        <Gravatar options={options} style={styles.avatar} />
+        <Avatar email={email} style={styles.avatar} />
         <Text style={styles.nickname}>{name}</Text>
         <Text style={styles.email}>{email}</Text>
         <CustomButton onPress={this.logout} label="Sair" />
