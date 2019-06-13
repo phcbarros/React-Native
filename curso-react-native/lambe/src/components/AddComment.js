@@ -5,9 +5,10 @@ import {
   Text,
   TouchableWithoutFeedback as TWF,
   TextInput,
-  Alert,
 } from 'react-native'
+import { connect } from 'react-redux'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import { addComment } from '../store/actions/posts'
 
 class AddComment extends React.Component {
   state = {
@@ -16,7 +17,14 @@ class AddComment extends React.Component {
   }
 
   handleAddComment = () => {
-    Alert.alert('Adicionado', this.state.comment)
+    this.props.onAddComment({
+      postId: this.props.postId,
+      comment: {
+        nickname: this.props.name,
+        comment: this.state.comment,
+      },
+    })
+    this.setState({ comment: '', editMode: false })
   }
 
   render() {
@@ -70,4 +78,15 @@ const styles = StyleSheet.create({
   },
 })
 
-export default AddComment
+const mapStateToProps = ({ user }) => ({ name: user.name })
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onAddComment: (comment) => dispatch(addComment(comment)),
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(AddComment)

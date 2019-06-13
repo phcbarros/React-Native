@@ -30,18 +30,35 @@ const initialState = {
     },
   ],
 }
-import { ADD_POST } from '../actions/posts'
+import { ADD_POST, ADD_COMMENT } from '../actions/posts'
 
 const reducer = (state = initialState, action) => {
-  switch (action.type) {
+  const { type, payload } = action
+  switch (type) {
     case ADD_POST:
       return {
         ...state,
-        posts: state.posts.concat({ ...action.payload }),
+        posts: state.posts.concat({ ...payload }),
+      }
+    case ADD_COMMENT:
+      return {
+        ...state,
+        posts: state.posts.map((post) => addComment(post, payload)),
       }
     default:
       return state
   }
+}
+
+const addComment = (post, payload) => {
+  if (post.id === payload.postId) {
+    if (post.comments) {
+      post.comments = post.comments.concat(payload.comment)
+    } else {
+      post.comments = [payload.comment]
+    }
+  }
+  return post
 }
 
 export default reducer

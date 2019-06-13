@@ -6,13 +6,13 @@ import AddComment from './AddComment'
 
 class Post extends React.Component {
   render() {
-    const { image, email, nickname, comments } = this.props
+    const { image, email, nickname, comments, id } = this.props
     return (
       <View style={styles.container}>
         <Image source={image} style={styles.image} />
         <Author email={email} nickname={nickname} />
         <Comments comments={comments} />
-        <AddComment />
+        <AddComment postId={id} />
       </View>
     )
   }
