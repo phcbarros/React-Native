@@ -8,11 +8,14 @@ import {
   Dimensions,
   Platform,
   ScrollView,
+  Alert,
 } from 'react-native'
 import { connect } from 'react-redux'
 import ImagePicker from 'react-native-image-picker'
 import CustomButton from '../components/CustomButton'
 import { addPost } from '../store/actions/posts'
+
+const NO_USER = 'Você precisa estar logado para adicionar uma imagem!'
 
 class AddPhoto extends React.Component {
   state = {
@@ -21,6 +24,10 @@ class AddPhoto extends React.Component {
   }
 
   pickImage = () => {
+    if (!this.props.name) {
+      Alert.alert('Ops!', NO_USER)
+      return
+    }
     ImagePicker.showImagePicker(
       {
         title: 'Escolha a imagem',
@@ -36,6 +43,10 @@ class AddPhoto extends React.Component {
   }
 
   save = async () => {
+    if (!this.props.name) {
+      Alert.alert('Ops!', NO_USER)
+      return
+    }
     this.props.onAddPost({
       id: Math.random(),
       nickname: this.props.name,
@@ -64,6 +75,7 @@ class AddPhoto extends React.Component {
           <TextInput
             placeholder="Algum comentário para a foto?"
             style={styles.input}
+            editable={this.props.name !== null}
             value={this.state.comment}
             onChangeText={(comment) => this.setState({ comment })}
           />
