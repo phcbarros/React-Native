@@ -88,7 +88,6 @@ class AddPhoto extends React.Component {
           <CustomButton
             onPress={this.save}
             label="Salvar"
-            style={this.props.loading ? styles.buttonDisabled : null}
             disabled={this.props.loading}
           />
         </View>
@@ -121,9 +120,6 @@ const styles = StyleSheet.create({
   input: {
     marginTop: 20,
     width: '90%',
-  },
-  buttonDisabled: {
-    backgroundColor: '#AAA',
   },
 })
 

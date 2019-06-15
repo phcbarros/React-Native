@@ -5,7 +5,11 @@ export default (props) => {
   return (
     <TouchableOpacity
       onPress={props.onPress}
-      style={[styles.button, props.style]}>
+      style={[
+        styles.button,
+        props.style,
+        props.disabled ? styles.buttonDisabled : null,
+      ]}>
       <Text style={styles.buttonText}>{props.label}</Text>
     </TouchableOpacity>
   )
@@ -20,5 +24,8 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 20,
     color: '#FFF',
+  },
+  buttonDisabled: {
+    backgroundColor: '#AAA',
   },
 })

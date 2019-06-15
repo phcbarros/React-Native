@@ -7,14 +7,18 @@ import { login } from '../store/actions/user'
 
 class Login extends React.Component {
   state = {
-    name: 'Paulo Barros',
     email: '',
     password: '',
   }
 
+  componentDidUpdate = (prevProps) => {
+    if (prevProps.isLoading && !this.props.isLoading) {
+      this.props.navigation.navigate('Profile')
+    }
+  }
+
   login = () => {
     this.props.onLogin({ ...this.state }) //sempre criar uma copia
-    this.props.navigation.navigate('Profile')
   }
 
   render() {
@@ -34,10 +38,15 @@ class Login extends React.Component {
           value={this.state.password}
           onChangeText={(password) => this.setState({ password })}
         />
-        <CustomButton onPress={this.login} label="Login" />
+        <CustomButton
+          onPress={this.login}
+          label="Login"
+          disabled={this.props.isLoading}
+        />
         <CustomButton
           onPress={() => this.props.navigation.navigate('Register')}
-          label="Criar nova conta..."
+          label="Criar nova conta"
+          disabled={this.props.isLoading}
         />
       </View>
     )
@@ -52,6 +61,8 @@ const styles = StyleSheet.create({
   },
 })
 
+const mapStateToProps = ({ user }) => ({ isLoading: user.isLoading })
+
 const mapDispatchToProps = (dispatch) => {
   return {
     onLogin: (user) => dispatch(login(user)),
@@ -59,6 +70,6 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(Login)
