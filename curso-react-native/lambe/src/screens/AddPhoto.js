@@ -23,6 +23,14 @@ class AddPhoto extends React.Component {
     comment: '',
   }
 
+  componentDidUpdate = (prevProps) => {
+    console.log(prevProps, this.props)
+    if (prevProps.loading && !this.props.loading) {
+      this.setState({ image: null, comment: null })
+      this.props.navigation.navigate('Feed')
+    }
+  }
+
   pickImage = () => {
     if (!this.props.name) {
       Alert.alert('Ops!', NO_USER)
@@ -59,8 +67,6 @@ class AddPhoto extends React.Component {
         },
       ],
     })
-    this.setState({ image: null, comment: null })
-    this.props.navigation.navigate('Feed')
   }
 
   render() {
@@ -79,7 +85,12 @@ class AddPhoto extends React.Component {
             value={this.state.comment}
             onChangeText={(comment) => this.setState({ comment })}
           />
-          <CustomButton onPress={this.save} label="Salvar" />
+          <CustomButton
+            onPress={this.save}
+            label="Salvar"
+            style={this.props.loading ? styles.buttonDisabled : null}
+            disabled={this.props.loading}
+          />
         </View>
       </ScrollView>
     )
@@ -116,7 +127,12 @@ const styles = StyleSheet.create({
   },
 })
 
-const mapStateToProps = ({ user }) => ({ name: user.name, email: user.email })
+const mapStateToProps = ({ user, posts }) => ({
+  name: user.name,
+  email: user.email,
+  loading: posts.isUploading,
+})
+
 const mapDispatchToProps = (dispatch) => {
   return {
     onAddPost: (post) => dispatch(addPost(post)),

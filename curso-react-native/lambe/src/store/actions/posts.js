@@ -1,8 +1,8 @@
 import axios from 'axios'
 
-export const ADD_POST = 'ADD_POST'
 export const addPost = (post) => {
   return async (dispatch) => {
+    dispatch(creatingPost())
     try {
       const upload = await axios({
         url: 'uploadImage',
@@ -12,11 +12,12 @@ export const addPost = (post) => {
           image: post.image.base64,
         },
       })
-
       post.image = upload.data.imageUrl
       await axios.post('/posts.json', {
         ...post,
       })
+      dispatch(fetchPosts())
+      dispatch(postCreated())
     } catch (error) {
       console.log(error)
     }
@@ -43,7 +44,7 @@ export const fetchPosts = () => {
           id: key,
         })
       }
-      dispatch(setPosts(posts))
+      dispatch(setPosts(posts.reverse()))
     } catch (error) {
       console.log(error)
     }
@@ -55,5 +56,19 @@ export const addComment = (comment) => {
   return {
     type: ADD_COMMENT,
     payload: comment,
+  }
+}
+
+export const CREATING_POST = 'CREATING_POST'
+export const creatingPost = () => {
+  return {
+    type: CREATING_POST,
+  }
+}
+
+export const POST_CREATED = 'POST_CREATED'
+export const postCreated = () => {
+  return {
+    type: POST_CREATED,
   }
 }
