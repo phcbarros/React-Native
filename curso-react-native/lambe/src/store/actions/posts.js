@@ -4,10 +4,19 @@ export const ADD_POST = 'ADD_POST'
 export const addPost = (post) => {
   return async (dispatch) => {
     try {
+      const upload = await axios({
+        url: 'uploadImage',
+        baseURL: 'https://us-central1-lambe-99df9.cloudfunctions.net',
+        method: 'post',
+        data: {
+          image: post.image.base64,
+        },
+      })
+
+      post.image = upload.data.imageUrl
       const res = await axios.post('/posts.json', {
         post: { ...post },
       })
-      console.log(res.data)
 
       return {
         type: ADD_POST,
