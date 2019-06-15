@@ -51,11 +51,19 @@ export const fetchPosts = () => {
   }
 }
 
-export const ADD_COMMENT = 'ADD_COMMENT'
-export const addComment = (comment) => {
-  return {
-    type: ADD_COMMENT,
-    payload: comment,
+export const addComment = (payload) => {
+  return async (dispatch) => {
+    try {
+      const url = `/posts/${payload.postId}.json`
+      const res = await axios.get(url)
+      const comments = res.data.comments || []
+      comments.push(payload.comment)
+
+      await axios.patch(url, { comments })
+      dispatch(fetchPosts())
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
 
