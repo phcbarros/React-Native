@@ -14,14 +14,36 @@ export const addPost = (post) => {
       })
 
       post.image = upload.data.imageUrl
-      const res = await axios.post('/posts.json', {
-        post: { ...post },
+      await axios.post('/posts.json', {
+        ...post,
       })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
 
-      return {
-        type: ADD_POST,
-        payload: post,
+export const SET_POSTS = 'SET_POSTS'
+export const setPosts = (posts) => {
+  return {
+    type: SET_POSTS,
+    payload: posts,
+  }
+}
+
+export const fetchPosts = () => {
+  return async (dispatch) => {
+    try {
+      const res = await axios.get('/posts.json')
+      const rawPosts = res.data //retorna um objeto e não um array
+      const posts = []
+      for (let key in res.data) {
+        posts.push({
+          ...rawPosts[key],
+          id: key,
+        })
       }
+      dispatch(setPosts(posts))
     } catch (error) {
       console.log(error)
     }

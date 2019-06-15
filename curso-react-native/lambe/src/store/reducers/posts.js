@@ -1,40 +1,13 @@
 const initialState = {
-  posts: [
-    {
-      id: Math.random(),
-      nickname: 'Paulo Barros',
-      email: 'phcbcontato@outlook.com',
-      image: require('../../../assets/imgs/fence.jpg'),
-      comments: [
-        {
-          nickname: 'Elisa Fernandes',
-          comment: 'Que lindo amor!',
-        },
-        {
-          nickname: 'Ian Muller',
-          comment: 'Não é Pokémon =/',
-        },
-      ],
-    },
-    {
-      id: Math.random(),
-      nickname: 'Paulo Barros',
-      email: 'phcbcontato@outlook.com',
-      image: require('../../../assets/imgs/bw.jpg'),
-      comments: [
-        {
-          nickname: 'Elisa Fernandes',
-          comment: 'Bora!',
-        },
-      ],
-    },
-  ],
+  posts: [],
 }
-import { ADD_POST, ADD_COMMENT } from '../actions/posts'
+import { ADD_POST, ADD_COMMENT, SET_POSTS } from '../actions/posts'
 
 const reducer = (state = initialState, action) => {
   const { type, payload } = action
   switch (type) {
+    case SET_POSTS:
+      return { ...state, posts: payload }
     case ADD_POST:
       return {
         ...state,
