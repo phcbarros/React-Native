@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { showError } from '../../resource/common'
 
 export const addPost = (post) => {
   return async (dispatch) => {
@@ -17,9 +18,11 @@ export const addPost = (post) => {
         ...post,
       })
       dispatch(fetchPosts())
-      dispatch(postCreated())
     } catch (error) {
       console.log(error)
+      dispatch(showError)
+    } finally {
+      dispatch(postCreated())
     }
   }
 }
@@ -47,6 +50,7 @@ export const fetchPosts = () => {
       dispatch(setPosts(posts.reverse()))
     } catch (error) {
       console.log(error)
+      dispatch(showError)
     }
   }
 }
@@ -63,6 +67,7 @@ export const addComment = (payload) => {
       dispatch(fetchPosts())
     } catch (error) {
       console.log(error)
+      dispatch(showError('Erro!', 'Erro ao adicionar comentário'))
     }
   }
 }

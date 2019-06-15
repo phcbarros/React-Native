@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { showError, showMessage } from '../../resource/common'
 
 const authBaseURL = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty'
 const API_KEY = 'AIzaSyC4lXjr1e-wM54f3r2ALWNVZjpV-9A6-Zk'
@@ -35,9 +36,11 @@ export const createUser = (user) => {
           name: user.name,
         })
         console.log('Usuário criado com sucesso')
+        dispatch(showMessage('Sucesso', 'Usuário criado com sucesso'))
       }
     } catch (error) {
       console.log(error)
+      dispatch(showError())
     }
   }
 }
@@ -78,7 +81,8 @@ export const login = (user) => {
         dispatch(loadedUser())
       }
     } catch (error) {
-      console.log(error)
+      console.log(JSON.stringify(error))
+      dispatch(showError())
     }
   }
 }
