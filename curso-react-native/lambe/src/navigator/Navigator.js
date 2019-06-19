@@ -6,7 +6,7 @@ import {
   createAppContainer,
 } from 'react-navigation'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import { Feed, AddPhoto, Profile, Login, Register } from '../screens'
+import { Feed, AddPhoto, Profile, Login, Register, Splash } from '../screens'
 
 const authRouter = createStackNavigator(
   {
@@ -80,4 +80,14 @@ const MenuConfig = {
 
 const MenuNavigator = createBottomTabNavigator(MenuRoutes, MenuConfig)
 
-export default createAppContainer(MenuNavigator)
+const SplashRouter = createSwitchNavigator(
+  {
+    Splash: Splash,
+    App: MenuNavigator,
+  },
+  {
+    initialRouteName: 'Splash',
+  },
+)
+
+export default createAppContainer(SplashRouter)
