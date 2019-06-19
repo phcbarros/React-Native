@@ -14,7 +14,7 @@ class Register extends React.Component {
 
   componentDidUpdate = (prevProps) => {
     if (prevProps.isLoading && !this.props.isLoading) {
-      this.props.navigation.navigate('Login')
+      this.props.navigation.navigate('Feed')
     }
   }
 

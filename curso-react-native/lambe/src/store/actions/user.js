@@ -37,8 +37,8 @@ export const createUser = (user) => {
           name: user.name,
         })
         console.log('Usuário criado com sucesso')
-        dispatch(loadedUser())
-        dispatch(showMessage('Sucesso', 'Usuário criado com sucesso'))
+        dispatch(login(user))
+        //dispatch(showMessage('Sucesso', 'Usuário criado com sucesso'))
       }
     } catch (error) {
       console.log(error)
@@ -75,11 +75,11 @@ export const login = (user) => {
       )
 
       if (res.data.localId) {
-        user.token = res.data.tokenId
+        user.token = res.data.idToken
         const resUser = await axios.get(`/users/${res.data.localId}.json`)
         delete user.password
         user.name = resUser.data.name
-        user.id = resUser.data.localId
+        user.id = res.data.localId
         dispatch(userLoggedIn(user))
         dispatch(loadedUser())
       }

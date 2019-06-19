@@ -2,7 +2,7 @@ import axios from 'axios'
 import { showError } from '../../resource/common'
 
 export const addPost = (post) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     dispatch(creatingPost())
     try {
       const upload = await axios({
@@ -14,7 +14,7 @@ export const addPost = (post) => {
         },
       })
       post.image = upload.data.imageUrl
-      await axios.post('/posts.json', {
+      await axios.post(`/posts.json?auth=${getState().user.token}`, {
         ...post,
       })
       dispatch(fetchPosts())
@@ -56,9 +56,9 @@ export const fetchPosts = () => {
 }
 
 export const addComment = (payload) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     try {
-      const url = `/posts/${payload.postId}.json`
+      const url = `/posts/${payload.postId}.json?auth=${getState().user.token}`
       const res = await axios.get(url)
       const comments = res.data.comments || []
       comments.push(payload.comment)

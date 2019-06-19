@@ -56,7 +56,7 @@ class AddPhoto extends React.Component {
       return
     }
     this.props.onAddPost({
-      id: Math.random(),
+      id: this.props.userId,
       nickname: this.props.name,
       email: this.props.email,
       image: this.state.image,
@@ -124,6 +124,7 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = ({ user, posts }) => ({
+  userId: user.id,
   name: user.name,
   email: user.email,
   loading: posts.isUploading,
