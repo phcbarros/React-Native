@@ -12,6 +12,12 @@ class Register extends React.Component {
     password: '',
   }
 
+  componentDidUpdate = (prevProps) => {
+    if (prevProps.isLoading && !this.props.isLoading) {
+      this.props.navigation.navigate('Login')
+    }
+  }
+
   createUser = () => {
     this.props.onCreateUser(this.state)
   }
@@ -53,6 +59,8 @@ const styles = StyleSheet.create({
   },
 })
 
+const mapStateToProps = ({ user }) => ({ isLoading: user.isLoading })
+
 const mapDispatchToProps = (dispatch) => {
   return {
     onCreateUser: (user) => dispatch(createUser(user)),
@@ -60,6 +68,6 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(Register)

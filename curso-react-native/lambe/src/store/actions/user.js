@@ -2,7 +2,7 @@ import axios from 'axios'
 import { showError, showMessage } from '../../resource/common'
 
 const authBaseURL = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty'
-const API_KEY = 'AIzaSyC4lXjr1e-wM54f3r2ALWNVZjpV-9A6-Zk'
+import { API_KEY } from '../../../configuration.json'
 
 export const USER_LOGGED_IN = 'USER_LOGGED_IN'
 export const userLoggedIn = (user) => {
@@ -21,6 +21,7 @@ export const logout = () => {
 
 export const createUser = (user) => {
   return async (dispatch) => {
+    dispatch(loadingUser())
     try {
       const res = await axios.post(
         `${authBaseURL}/signupNewUser?key=${API_KEY}`,
@@ -36,6 +37,7 @@ export const createUser = (user) => {
           name: user.name,
         })
         console.log('Usuário criado com sucesso')
+        dispatch(loadedUser())
         dispatch(showMessage('Sucesso', 'Usuário criado com sucesso'))
       }
     } catch (error) {
@@ -77,6 +79,7 @@ export const login = (user) => {
         const resUser = await axios.get(`/users/${res.data.localId}.json`)
         delete user.password
         user.name = resUser.data.name
+        user.id = resUser.data.localId
         dispatch(userLoggedIn(user))
         dispatch(loadedUser())
       }
