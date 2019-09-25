@@ -14,8 +14,8 @@ import {
   View,
   Text,
   StatusBar,
+  Button
 } from 'react-native';
-
 import {
   Header,
   LearnMoreLinks,
@@ -23,6 +23,7 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import FullScreen from './FullScreen';
 
 const App: () => React$Node = () => {
   return (
@@ -40,6 +41,10 @@ const App: () => React$Node = () => {
           )}
           <View style={styles.body}>
             <View style={styles.sectionContainer}>
+              <Text style={styles.sectionDescription}>Enable Full Screen</Text>
+              <Button onPress={() => FullScreen.enable()} title="enable" />
+              <Text style={styles.sectionDescription}>Disable Full Screen</Text>
+              <Button onPress={() => FullScreen.disable()} title="disable" />
               <Text style={styles.sectionTitle}>Step One</Text>
               <Text style={styles.sectionDescription}>
                 Edit <Text style={styles.highlight}>App.js</Text> to change this
