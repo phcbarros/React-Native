@@ -7,7 +7,7 @@
  */
 
 import React from 'react'
-import { SafeAreaView, StatusBar } from 'react-native'
+import { SafeAreaView, StatusBar, Text } from 'react-native'
 import { ListViewScreen } from 'screens/list-views'
 
 const App: () => React$Node = () => {

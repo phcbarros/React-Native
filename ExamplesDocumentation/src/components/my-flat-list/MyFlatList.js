@@ -1,5 +1,6 @@
 import React from 'react'
 import { FlatList, StyleSheet, Text, View } from 'react-native'
+import { dsFonts } from 'resources/ds'
 
 const MyFlatList = (props) => {
   return (
@@ -25,10 +26,12 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 18,
     height: 44,
+    ...dsFonts.montserratRegular,
   },
   title: {
     fontSize: 24,
     textAlign: 'center',
+    ...dsFonts.montserratBold,
   },
 })
 

@@ -1,5 +1,6 @@
 import React from 'react'
-import { SectionList, StyleSheet, Text, View, ScrollView } from 'react-native'
+import { SectionList, StyleSheet, Text, View } from 'react-native'
+import { dsFonts } from 'resources/ds'
 
 const MySectionList = (props) => {
   return (
@@ -32,19 +33,21 @@ const styles = StyleSheet.create({
   },
   sectionHeader: {
     padding: 10,
-    fontSize: 14,
-    fontWeight: 'bold',
+    fontSize: 20,
+    ...dsFonts.montserratMedium,
     backgroundColor: 'rgba(247,247,247,1.0)',
   },
   item: {
     padding: 10,
     fontSize: 18,
     height: 44,
+    ...dsFonts.montserratRegular,
   },
   title: {
     fontSize: 24,
     textAlign: 'center',
     marginBottom: 16,
+    ...dsFonts.montserratBold,
   },
 })
 
