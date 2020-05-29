@@ -1,24 +1,6 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React from 'react'
-import { SafeAreaView, StatusBar, Text } from 'react-native'
-import { ListViewScreen } from 'screens/list-views'
+import { Navegacao } from './screens/Navegacao'
 
-const App: () => React$Node = () => {
-  return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ListViewScreen />
-      </SafeAreaView>
-    </>
-  )
+export default function App() {
+  return <Navegacao />
 }
-
-export default App
