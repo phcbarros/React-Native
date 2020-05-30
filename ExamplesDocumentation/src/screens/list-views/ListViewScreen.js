@@ -1,9 +1,9 @@
 import React from 'react'
-import { View, ScrollView } from 'react-native'
 import { MyFlatList } from 'components/my-flat-list'
 import { MySectionList } from 'components/my-section-list'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
-const users = [{ name: 'Paulo' }, { name: 'Elisa' }]
+const users = [{ id: 1, name: 'Paulo' }, { id: 2, name: 'Elisa' }]
 const padrinhos = [
   {
     title: 'Madrinhas',
@@ -35,10 +35,10 @@ const padrinhos = [
 
 const ListViewScreen = () => {
   return (
-    <ScrollView>
+    <SafeAreaView style={{ flex: 1 }}>
       <MyFlatList data={users} />
       <MySectionList data={padrinhos} />
-    </ScrollView>
+    </SafeAreaView>
   )
 }
 

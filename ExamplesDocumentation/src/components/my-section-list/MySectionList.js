@@ -30,6 +30,7 @@ const MySectionList = (props) => {
 const styles = StyleSheet.create({
   container: {
     paddingTop: 22,
+    flex: 1,
   },
   sectionHeader: {
     padding: 10,

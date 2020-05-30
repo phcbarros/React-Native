@@ -8,6 +8,7 @@ const MyFlatList = (props) => {
       <Text style={styles.title}>Noivos</Text>
       <FlatList
         data={props.data}
+        keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <View style={{ borderBottomColor: '#e3e3e3', borderBottomWidth: 1 }}>
             <Text style={styles.item}>{item.name}</Text>
