@@ -1,7 +1,7 @@
 import React from 'react'
-import { MyFlatList } from 'components/my-flat-list'
-import { MySectionList } from 'components/my-section-list'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { MyFlatList } from '@/components/my-flat-list'
+import { MySectionList } from '@/components/my-section-list'
 
 const users = [{ id: 1, name: 'Paulo' }, { id: 2, name: 'Elisa' }]
 const padrinhos = [
