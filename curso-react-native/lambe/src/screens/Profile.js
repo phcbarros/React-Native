@@ -61,7 +61,4 @@ const mapStateToProps = ({ user }) => ({ name: user.name, email: user.email })
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators({ onLogout: logout }, dispatch)
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Profile)
+export default connect(mapStateToProps, mapDispatchToProps)(Profile)
