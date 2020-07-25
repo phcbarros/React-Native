@@ -2,7 +2,7 @@ import axios from 'axios'
 import { showError, showMessage } from '../../resource/common'
 
 const authBaseURL = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty'
-import { API_KEY } from '../../../configuration.json'
+import { API_KEY } from '../../../configuration.json' //github
 
 export const USER_LOGGED_IN = 'USER_LOGGED_IN'
 export const userLoggedIn = (user) => {
@@ -12,7 +12,7 @@ export const userLoggedIn = (user) => {
   }
 }
 
-const USER_LOGGED_OUT = 'USER_LOGGED_OUT'
+export const USER_LOGGED_OUT = 'USER_LOGGED_OUT'
 export const logout = () => {
   return {
     type: USER_LOGGED_OUT,

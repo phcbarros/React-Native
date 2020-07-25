@@ -11,9 +11,14 @@ class Login extends React.Component {
     password: '',
   }
 
+  componentWillUpdate(prevProps) {
+    if (prevProps.user.token && this.props.user.token)
+      this.props.navigation.navigate('Profile')
+  }
+
   componentDidUpdate = (prevProps) => {
     if (prevProps.isLoading && !this.props.isLoading) {
-      this.props.navigation.navigate('Feed')
+      return this.props.navigation.navigate('Feed')
     }
   }
 
@@ -61,7 +66,10 @@ const styles = StyleSheet.create({
   },
 })
 
-const mapStateToProps = ({ user }) => ({ isLoading: user.isLoading })
+const mapStateToProps = ({ user }) => ({
+  isLoading: user.isLoading,
+  user: user,
+})
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -69,7 +77,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Login)
+export default connect(mapStateToProps, mapDispatchToProps)(Login)
