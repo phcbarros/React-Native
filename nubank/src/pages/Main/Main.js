@@ -51,7 +51,7 @@ export default function Main() {
 
       Animated.timing(translateY, {
         toValue: opened ? 380 : 0,
-        duration: 500,
+        duration: 300,
         useNativeDriver: true,
       }).start(() => {
         offset = opened ? 380 : 0
@@ -63,7 +63,7 @@ export default function Main() {
 
   return (
     <Container>
-      <Header />
+      <Header translateY={translateY} />
 
       <Content>
         <Menu translateY={translateY} />

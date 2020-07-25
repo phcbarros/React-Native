@@ -1,6 +1,7 @@
+import { Animated } from 'react-native'
 import styled from 'styled-components/native'
 
-export const Container = styled.View`
+export const Container = styled(Animated.View)`
   align-items: center;
   padding: 40px 0 30px;
 `
@@ -16,3 +17,5 @@ export const Title = styled.Text`
   font-weight: bold;
   margin-left: 8px;
 `
+
+export const IconContainer = styled(Animated.View)``
