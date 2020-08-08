@@ -12,7 +12,7 @@ import {
   LinkButton,
   SmallText,
 } from './styles'
-import RiotLogo from '~/assets/riot-games.svg'
+import RiotLogo from '~/assets/images/riot-games.svg'
 import { Alert } from 'react-native'
 
 const onLogin = () => {

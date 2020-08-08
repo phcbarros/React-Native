@@ -28,8 +28,13 @@ export const TextInputContainer = styled.View`
   margin-top: 10px;
 `
 
+export const LoginTextInput = styled(TextInput)`
+  font-size: 18px;
+  background-color: transparent;
+`
+
 export const SignupContainer = styled.View`
-  margin-top: 20px;
+  margin-top: 30px;
   margin-left: -15px;
   margin-right: -15px;
   flex-direction: row;
@@ -40,11 +45,7 @@ export const LinkButton = styled(Button)``
 
 export const SmallText = styled(Text)`
   color: ${DefaultTheme.colors.primary};
-`
-
-export const LoginTextInput = styled(TextInput)`
-  font-size: 16px;
-  background-color: transparent;
+  font-size: 12px;
 `
 
 export const LoginButton = styled(Button)`
