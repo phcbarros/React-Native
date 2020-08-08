@@ -9,7 +9,7 @@ import App from './App'
 import { name as appName } from './app.json'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
-Icon.load()
+Icon.loadFont()
 export default function Main() {
   return (
     <PaperProvider>
