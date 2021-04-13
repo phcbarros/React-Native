@@ -3,9 +3,7 @@ import { Text } from 'react-native';
 import estilo from '../estilo/estilo';
 
 export default ({ min, max }) => {
-  return (
-    <Text style={estilo.txtG}>
-      Valor aleatório entre {min} e {max} é {Math.floor(Math.random() * (max - min)) + min}
-    </Text>
-  );
+  const delta = max - min + 1;
+  const aleatorio = Math.floor(Math.random() * delta) + min;
+  return <Text style={estilo.txtG}>O valor aleatório é {aleatorio}</Text>;
 };
