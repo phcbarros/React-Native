@@ -3,13 +3,13 @@ import { SafeAreaView, StyleSheet } from 'react-native';
 //import MinMax from './components/MinMax';
 //import Aleatorio from './components/NumAleatorio';
 //import Titulo from './components/Titulo';
-import Contador from './components/Contador';
+import Contador from './components/contator/ContadorV2';
 
 export default () => {
   return (
     <SafeAreaView style={style.App}>
-      {/* <Contador inicial={1} passo={13} />
-      <Contador /> */}
+      <Contador />
+      {/* <Contador inicial={1} passo={13} /> */}
       {/* <Titulo titulo="Cadastro de produto" subTitulo="Tela de cadastro de produto" /> */}
       {/* <MinMax min={1} max={2} /> */}
       {/* <Aleatorio min={1} max={60} />
