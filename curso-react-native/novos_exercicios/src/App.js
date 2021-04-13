@@ -2,20 +2,25 @@ import React from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
 //import MinMax from './components/MinMax';
 //import Aleatorio from './components/NumAleatorio';
-import Titulo from './components/Titulo'
+//import Titulo from './components/Titulo';
+import Contador from './components/Contador';
 
-export default () => (
-  <SafeAreaView style={style.App}>
-    <Titulo titulo="Cadastro de produto" subTitulo="Tela de cadastro de produto" />
-    {/* <MinMax min={1} max={2} /> */}
-    {/* <Aleatorio min={1} max={60} />
-    <Aleatorio min={1} max={60} />
-    <Aleatorio min={1} max={60} />
-    <Aleatorio min={1} max={60} />
-    <Aleatorio min={1} max={60} />
-    <Aleatorio min={1} max={60} /> */}
-  </SafeAreaView>
-);
+export default () => {
+  return (
+    <SafeAreaView style={style.App}>
+      {/* <Contador inicial={1} passo={13} />
+      <Contador /> */}
+      {/* <Titulo titulo="Cadastro de produto" subTitulo="Tela de cadastro de produto" /> */}
+      {/* <MinMax min={1} max={2} /> */}
+      {/* <Aleatorio min={1} max={60} />
+      <Aleatorio min={1} max={60} />
+      <Aleatorio min={1} max={60} />
+      <Aleatorio min={1} max={60} />
+      <Aleatorio min={1} max={60} />
+      <Aleatorio min={1} max={60} /> */}
+    </SafeAreaView>
+  );
+};
 
 const style = StyleSheet.create({
   App: {
