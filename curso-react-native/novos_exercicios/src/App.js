@@ -6,13 +6,14 @@ import { SafeAreaView, StyleSheet, View } from 'react-native';
 //import Contador from './components/contator/ContadorV2';
 //import DigiteSeuNome from './components/DigiteSeuNome';
 //import FlexBox1 from './components/layout/FlexBoxV1';
-import FlexBox2 from './components/layout/FlexBoxV2';
+//import FlexBox2 from './components/layout/FlexBoxV2';
+import FlexBox3 from './components/layout/FlexBoxV3';
 
 export default () => {
   return (
     <SafeAreaView style={style.App}>
       <View style={style.Container}>
-        <FlexBox2 />
+        <FlexBox3 />
         {/* <Contador />
         <DigiteSeuNome />
         <Contador inicial={1} passo={13} /> 
