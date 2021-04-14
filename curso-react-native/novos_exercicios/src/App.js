@@ -15,7 +15,7 @@ export default () => {
   return (
     <SafeAreaView style={style.App}>
       <View style={style.Container}>
-        <Mega qtdNumeros={6} />
+        <Mega qtdNumeros={12} />
         {/* <Contador />
         <FlexBox4 />
         <FlexBox3 />

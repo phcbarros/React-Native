@@ -1,7 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import { Text, Button, TextInput } from 'react-native';
+import { Text, Button, TextInput, View } from 'react-native';
 import estilo from '../../estilo/estilo';
+import Numero from './Numero';
 
 export default class Mega extends React.Component {
   state = {
@@ -19,12 +20,18 @@ export default class Mega extends React.Component {
   };
 
   gerarNumeros = () => {
-    console.warn(this.state.qtdNumeros);
     const numeros = Array(this.state.qtdNumeros)
       .fill()
-      .reduce((n) => [...n, this.geraNumeroNaoContido(n)], []);
-    this.setState({ numeros }, () => console.warn(this.state.numeros));
+      .reduce((n) => [...n, this.geraNumeroNaoContido(n)], [])
+      .sort((a, b) => a - b);
+    this.setState({ numeros });
   };
+
+  exibirNumeros = () => {
+    return this.state.numeros.map((numero) => {
+      return <Numero key={numero} numero={numero} />
+    });
+  }
 
   render() {
     return (
@@ -38,7 +45,14 @@ export default class Mega extends React.Component {
           onChangeText={this.alterarQtdNumeros}
         />
         <Button title="Gerar" onPress={this.gerarNumeros} />
-        <Text>{this.state.numeros.join(',')}</Text>
+        <View
+          style={{
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+          }}>
+          {this.exibirNumeros()}
+        </View>
       </>
     );
   }
