@@ -7,14 +7,16 @@ import { SafeAreaView, StyleSheet, View } from 'react-native';
 //import DigiteSeuNome from './components/DigiteSeuNome';
 //import FlexBox1 from './components/layout/FlexBoxV1';
 //import FlexBox2 from './components/layout/FlexBoxV2';
-import FlexBox3 from './components/layout/FlexBoxV3';
+//import FlexBox3 from './components/layout/FlexBoxV3';
+import FlexBox4 from './components/layout/FlexBoxV4';
 
 export default () => {
   return (
     <SafeAreaView style={style.App}>
       <View style={style.Container}>
-        <FlexBox3 />
+        <FlexBox4 />
         {/* <Contador />
+        <FlexBox3 />
         <DigiteSeuNome />
         <Contador inicial={1} passo={13} /> 
         <Titulo titulo="Cadastro de produto" subTitulo="Tela de cadastro de produto" />
