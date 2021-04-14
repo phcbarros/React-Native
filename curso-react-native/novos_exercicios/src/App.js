@@ -8,14 +8,16 @@ import { SafeAreaView, StyleSheet, View } from 'react-native';
 //import FlexBox1 from './components/layout/FlexBoxV1';
 //import FlexBox2 from './components/layout/FlexBoxV2';
 //import FlexBox3 from './components/layout/FlexBoxV3';
-import FlexBox4 from './components/layout/FlexBoxV4';
+//import FlexBox4 from './components/layout/FlexBoxV4';
+import Mega from './components/mega/Mega';
 
 export default () => {
   return (
     <SafeAreaView style={style.App}>
       <View style={style.Container}>
-        <FlexBox4 />
+        <Mega qtdNumeros={6} />
         {/* <Contador />
+        <FlexBox4 />
         <FlexBox3 />
         <DigiteSeuNome />
         <Contador inicial={1} passo={13} /> 
