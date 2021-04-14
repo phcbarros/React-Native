@@ -4,13 +4,17 @@ import { SafeAreaView, StyleSheet } from 'react-native';
 //import Aleatorio from './components/NumAleatorio';
 //import Titulo from './components/Titulo';
 //import Contador from './components/contator/ContadorV2';
-import DigiteSeuNome from './components/DigiteSeuNome';
+//import DigiteSeuNome from './components/DigiteSeuNome';
+import Quadrado from './components/layout/Quadrado';
 
 export default () => {
   return (
     <SafeAreaView style={style.App}>
-      <DigiteSeuNome />
+      <Quadrado />
+      <Quadrado cor="#900" />
+      <Quadrado cor="#090" />
       {/* <Contador />
+      <DigiteSeuNome />
       <Contador inicial={1} passo={13} /> 
       <Titulo titulo="Cadastro de produto" subTitulo="Tela de cadastro de produto" />
       <MinMax min={1} max={2} />
