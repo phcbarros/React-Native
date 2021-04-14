@@ -5,14 +5,12 @@ import { SafeAreaView, StyleSheet } from 'react-native';
 //import Titulo from './components/Titulo';
 //import Contador from './components/contator/ContadorV2';
 //import DigiteSeuNome from './components/DigiteSeuNome';
-import Quadrado from './components/layout/Quadrado';
+import FlexBox1 from './components/layout/FlexBoxV1';
 
 export default () => {
   return (
     <SafeAreaView style={style.App}>
-      <Quadrado />
-      <Quadrado cor="#900" />
-      <Quadrado cor="#090" />
+      <FlexBox1 />
       {/* <Contador />
       <DigiteSeuNome />
       <Contador inicial={1} passo={13} /> 
