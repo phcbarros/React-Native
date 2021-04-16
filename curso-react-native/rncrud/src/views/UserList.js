@@ -1,20 +1,46 @@
 import React from 'react'
-import { View, Text, FlatList, StyleSheet } from 'react-native'
+import { View, FlatList, StyleSheet, Alert } from 'react-native'
 import { Avatar, ListItem } from 'react-native-elements'
 import users from '../data/users'
 
 export default (props) => {
+  function confirmUserDeletation(user) {
+    Alert.alert('Excluir Usuário', 'Deseja excluir o usuário?', [
+      {
+        text: 'Sim',
+        onPress: () => console.warn(`delete ${user.id}`),
+      },
+      {
+        text: 'Não',
+      },
+    ])
+  }
+
+  function naviigateTouUserForm(user) {
+    props.navigation.navigate('UserForm', user)
+  }
+
   const renderItems = ({ item: user }) => {
     return (
       <ListItem
         key={user.id}
         bottomDivider
-        onPress={() => props.navigation.navigate('UserForm')}>
-        <Avatar source={{ uri: user.avatarUrl }} avatarStyle={style.avatar} />
+        onPress={() => naviigateTouUserForm(user)}>
+        <Avatar source={{ uri: user.avatarUrl }} avatarStyle={styles.avatar} />
         <ListItem.Content>
           <ListItem.Title>{user.name}</ListItem.Title>
           <ListItem.Subtitle>{user.email}</ListItem.Subtitle>
         </ListItem.Content>
+        <ListItem.Chevron
+          onPress={() => naviigateTouUserForm(user)}
+          iconProps={{ name: 'pencil' }}
+          iconStyle={styles.iconEdit}
+        />
+        <ListItem.Chevron
+          onPress={() => confirmUserDeletation(user)}
+          iconProps={{ name: 'trash' }}
+          iconStyle={styles.iconTrash}
+        />
       </ListItem>
     )
   }
@@ -30,8 +56,16 @@ export default (props) => {
   )
 }
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   avatar: {
     borderRadius: 25,
+  },
+  iconTrash: {
+    fontSize: 25,
+    color: 'red',
+  },
+  iconEdit: {
+    fontSize: 25,
+    color: 'orange',
   },
 })
