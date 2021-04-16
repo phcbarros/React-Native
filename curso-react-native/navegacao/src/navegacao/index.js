@@ -1,12 +1,16 @@
 import React from 'react'
-import {SafeAreaView, StyleSheet} from 'react-native'
+import {SafeAreaView, View, StyleSheet} from 'react-native'
 import {NavigationContainer} from '@react-navigation/native'
-import Stack from './Stack'
+//import Stack from './Stack'
+import Tab from './Tab'
+
 export default props => (
   <SafeAreaView style={style.app}>
-    <NavigationContainer>
-      <Stack />
-    </NavigationContainer>
+    <View style={style.app}>
+      <NavigationContainer>
+        <Tab />
+      </NavigationContainer>
+    </View>
   </SafeAreaView>
 )
 
