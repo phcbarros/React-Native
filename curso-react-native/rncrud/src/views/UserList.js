@@ -21,7 +21,7 @@ export default (props) => {
     ])
   }
 
-  function naviigateTouUserForm(user) {
+  function naviigateToUserForm(user) {
     props.navigation.navigate('UserForm', user)
   }
 
@@ -30,14 +30,14 @@ export default (props) => {
       <ListItem
         key={user.id}
         bottomDivider
-        onPress={() => naviigateTouUserForm(user)}>
+        onPress={() => naviigateToUserForm(user)}>
         <Avatar source={{ uri: user.avatarUrl }} avatarStyle={styles.avatar} />
         <ListItem.Content>
           <ListItem.Title>{user.name}</ListItem.Title>
           <ListItem.Subtitle>{user.email}</ListItem.Subtitle>
         </ListItem.Content>
         <ListItem.Chevron
-          onPress={() => naviigateTouUserForm(user)}
+          onPress={() => naviigateToUserForm(user)}
           iconProps={{ name: 'pencil' }}
           iconStyle={styles.iconEdit}
         />
