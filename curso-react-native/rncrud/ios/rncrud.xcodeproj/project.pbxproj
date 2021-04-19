@@ -114,7 +114,6 @@
 				0AD8465DA8129CEABC50A48D /* Pods-rncrud-rncrudTests.debug.xcconfig */,
 				640F657894955D82B8CFEAA1 /* Pods-rncrud-rncrudTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -134,6 +133,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				5F46FE5E1D6D375B20C85F2C /* Pods */,
+				B6A22BA7043843C884757826 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -147,6 +147,13 @@
 				00E356EE1AD99517003FC87E /* rncrudTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		B6A22BA7043843C884757826 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -306,7 +313,7 @@
 		};
 		4DDA8E36EEF63E3C29EDBA39 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputFileListPaths = (
