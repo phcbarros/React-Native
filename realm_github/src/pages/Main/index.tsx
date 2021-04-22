@@ -61,6 +61,10 @@ const Main = () => {
     }
   }
 
+  async function handleRefresh(repository: Repo) {
+    saveRepository()
+  }
+
   return (
     <Container>
       <Title>Repositorios</Title>
@@ -81,7 +85,9 @@ const Main = () => {
         keyboardShouldPersistTaps="handled"
         data={repositories}
         keyExtractor={(item: Repo) => String(item.id)}
-        renderItem={({ item }) => <Repository data={item} />}
+        renderItem={({ item }) => (
+          <Repository data={item} onRefresh={() => handleRefresh(item)} />
+        )}
       />
     </Container>
   )

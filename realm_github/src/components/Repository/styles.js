@@ -33,3 +33,15 @@ export const Stat = styled.View`
 export const StatCount = styled.Text`
   margin-left: 4px;
 `
+
+export const Refresh = styled.TouchableOpacity`
+  flex-direction: row;
+  margin-top: 10px;
+`
+
+export const RefreshText = styled.Text`
+  margin-left: 5px;
+  color: #7159c1;
+  font-size: 14px;
+  font-weight: bold;
+`
