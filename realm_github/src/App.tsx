@@ -1,6 +1,16 @@
 import React from 'react'
-import { Text } from 'react-native'
+import { StatusBar } from 'react-native'
+import Main from './pages/Main'
 
 export default () => {
-  return <Text>App</Text>
+  return (
+    <>
+      <StatusBar
+        backgroundColor="transparent"
+        translucent
+        barStyle="light-content"
+      />
+      <Main />
+    </>
+  )
 }
