@@ -1,9 +1,10 @@
 import React from 'react'
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import Repository from '../../components/Repository'
 
-import { Container, Title, Form, Input, Submit } from './styles'
+import { Container, Title, Form, Input, Submit, List } from './styles'
 
-const Main: React.FC = () => {
+const Main = () => {
   return (
     <Container>
       <Title>Repositorios</Title>
@@ -17,6 +18,20 @@ const Main: React.FC = () => {
           <Icon name="add" size={22} color={'#fff'} />
         </Submit>
       </Form>
+      <List
+        keyboardShouldPersistTaps="handled"
+        data={[
+          {
+            id: 1,
+            name: 'repo',
+            stars: 123,
+            forks: 40,
+            description: 'fafdafaf fadaf',
+          },
+        ]}
+        keyExtractor={(item) => String(item.id)}
+        renderItem={({ item }) => <Repository data={item} />}
+      />
     </Container>
   )
 }

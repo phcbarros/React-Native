@@ -8,7 +8,7 @@ export const Container = styled(LinearGradient).attrs({
   end: { x: 1, y: 1 },
 })`
   flex: 1;
-  padding-top: ${30 + getStatusBarHeight(true)};
+  padding-top: ${30 + getStatusBarHeight(true)}px;
 `
 
 export const Title = styled.Text`
@@ -19,7 +19,7 @@ export const Title = styled.Text`
 `
 export const Form = styled.View`
   flex-direction: row;
-  margin-top: 10;
+  margin-top: 10px;
   padding: 0 20px;
 `
 export const Input = styled.TextInput.attrs({
@@ -38,4 +38,12 @@ export const Submit = styled.TouchableOpacity`
   justify-content: center;
   border-radius: 4px;
   padding: 0 14px;
+`
+export const List = styled.FlatList.attrs({
+  contentContainerStyle: {
+    paddingHorizontal: 20,
+  },
+  showVerticalScrollIndicator: false,
+})`
+  margin-top: 20px;
 `
