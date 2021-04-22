@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Keyboard } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import { Results } from 'realm'
 import Repository from '../../components/Repository'
 import api from '../../services/api'
 import getRealm from '../../services/realm'
@@ -11,6 +12,25 @@ import { Container, Title, Form, Input, Submit, List } from './styles'
 const Main = () => {
   const [input, setInput] = useState('')
   const [error, setError] = useState(false)
+  const [repositories, setRepositories] = useState<Results<Object>>()
+
+  async function getRepositories() {
+    try {
+      const realm = await getRealm()
+
+      const data: Results<Object> = realm
+        .objects('Repository')
+        .sorted('stars', true)
+
+      setRepositories(data)
+    } catch (err) {
+      console.warn(err)
+    }
+  }
+
+  useEffect(() => {
+    getRepositories()
+  }, [])
 
   async function saveRepository(repository: GithubResponse) {
     const data: RepositorySchema = {
@@ -59,15 +79,7 @@ const Main = () => {
       </Form>
       <List
         keyboardShouldPersistTaps="handled"
-        data={[
-          {
-            id: 1,
-            name: 'repo',
-            stars: 123,
-            forks: 40,
-            description: 'fafdafaf fadaf',
-          },
-        ]}
+        data={repositories}
         keyExtractor={(item: Repo) => String(item.id)}
         renderItem={({ item }) => <Repository data={item} />}
       />
