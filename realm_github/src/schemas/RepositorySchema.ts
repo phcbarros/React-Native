@@ -6,7 +6,7 @@ export default class RepositorySchema {
       id: { type: 'int', indexed: true },
       name: 'string',
       fullName: 'string',
-      descriptionL: 'string',
+      description: 'string',
       stars: 'int',
       forks: 'int',
     },
