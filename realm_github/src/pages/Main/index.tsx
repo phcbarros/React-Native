@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { Keyboard } from 'react-native'
+import { Alert, Keyboard } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
-import { Results } from 'realm'
+import { Results, UpdateMode } from 'realm'
 import Repository from '../../components/Repository'
 import api from '../../services/api'
 import getRealm from '../../services/realm'
-import { GithubResponse, Repo, RepositorySchema } from '../../types/types'
+import { GithubResponse, RepositorySchema } from '../../types/types'
 
 import { Container, Title, Form, Input, Submit, List } from './styles'
 
 const Main = () => {
   const [input, setInput] = useState('')
   const [error, setError] = useState(false)
-  const [repositories, setRepositories] = useState<Results<Object>>()
+  const [repositories, setRepositories] = useState([])
 
   async function getRepositories() {
     try {
@@ -25,6 +25,7 @@ const Main = () => {
       setRepositories(data)
     } catch (err) {
       console.warn(err)
+      Alert.alert('Erro', 'Erro ao recuperar os dados locais')
     }
   }
 
@@ -44,8 +45,10 @@ const Main = () => {
 
     const realm = await getRealm()
     realm.write(() => {
-      realm.create('Repository', data)
+      realm.create('Repository', data, UpdateMode.Modified)
     })
+
+    return data
   }
 
   async function handleAddRepository() {
@@ -61,8 +64,16 @@ const Main = () => {
     }
   }
 
-  async function handleRefresh(repository: Repo) {
-    saveRepository()
+  async function handleRefresh(repository: RepositorySchema) {
+    try {
+      const response = await api.get(`/repos/${repository.fullName}`)
+      const data = await saveRepository(response.data)
+      setRepositories(
+        repositories.map((item) => (item.id === data.id ? data : item)),
+      )
+    } catch (err) {
+      Alert.alert('Erro', 'Erro ao atualizar os dados!')
+    }
   }
 
   return (
@@ -84,7 +95,7 @@ const Main = () => {
       <List
         keyboardShouldPersistTaps="handled"
         data={repositories}
-        keyExtractor={(item: Repo) => String(item.id)}
+        keyExtractor={(item: RepositorySchema) => String(item.id)}
         renderItem={({ item }) => (
           <Repository data={item} onRefresh={() => handleRefresh(item)} />
         )}
