@@ -10,7 +10,7 @@ import { GithubResponse, RepositorySchema } from '../../types/types'
 import { Container, Title, Form, Input, Submit, List } from './styles'
 
 const Main = () => {
-  const [input, setInput] = useState('')
+  const [input, setInput] = useState('paulo')
   const [error, setError] = useState(false)
   const [repositories, setRepositories] = useState([])
 
@@ -83,7 +83,7 @@ const Main = () => {
         <Input
           value={input}
           error={error}
-          onChangeText={setInput}
+          onChangeText={(text) => setInput(text)}
           autoCapitalize="none"
           autoCorrect={false}
           placeholder="Procurar repositório ..."
