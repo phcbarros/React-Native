@@ -22,6 +22,9 @@ import {UserContext} from '../context/UserContext'
 import HomeScreen from '../screens/home/HomeScreen'
 import CalendarScreen from '../screens/calendar/CalendarScreen'
 
+import {AuthManager} from '../auth/AuthManager'
+import {GraphManager} from '../graph/GraphManager'
+
 const Drawer = createDrawerNavigator()
 
 type CustomDrawerContentProps = DrawerContentComponentProps & {
@@ -72,6 +75,33 @@ export default class DrawerMenuContent extends React.Component<DrawerMenuProps> 
     this.props.navigation.setOptions({
       headerShown: false,
     })
+
+    try {
+      // Get the signed-in user from Graph
+      const user: MicrosoftGraph.User = await GraphManager.getUserAsync()
+
+      // Update UI with display name and email
+      this.setState({
+        userLoading: false,
+        userFirstName: user.givenName!,
+        userFullName: user.displayName!,
+        // Work/School accounts have email address in mail attribute
+        // Personal accounts have it in userPrincipalName
+        userEmail: user.mail! || user.userPrincipalName!,
+        userTimeZone: user.mailboxSettings?.timeZone!,
+      })
+    } catch (error) {
+      Alert.alert(
+        'Error getting user',
+        JSON.stringify(error),
+        [
+          {
+            text: 'OK',
+          },
+        ],
+        {cancelable: false},
+      )
+    }
   }
 
   render() {

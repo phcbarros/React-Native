@@ -11,6 +11,8 @@ import SignInScreen from './screens/signin/SigiInScreen'
 import DrawerMenuContent from './menus/DrawerMenu'
 import AuthLoadingScreen from './screens/auth-loading/AuthLoadingScreen'
 
+import {AuthManager} from './auth/AuthManager'
+
 const Stack = createStackNavigator()
 
 type Props = {
@@ -61,9 +63,12 @@ export default function App({navigation}: Props) {
   const authContext = React.useMemo(
     () => ({
       signIn: async () => {
-        dispatch({type: 'SIGN_IN', token: 'placeholder-token'})
+        await AuthManager.signInAsync()
+        const token = await AuthManager.getAccessTokenAsync()
+        dispatch({type: 'SIGN_IN', token: token})
       },
       signOut: async () => {
+        await AuthManager.signOutAsync()
         dispatch({type: 'SIGN_OUT'})
       },
     }),
