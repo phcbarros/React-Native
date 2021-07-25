@@ -38,4 +38,9 @@ export class GraphManager {
       .top(50)
       .get()
   }
+
+  static createEvent = async (newEvent: any) => {
+    // POST /me/events
+    await graphClient.api('/me/events').post(newEvent)
+  }
 }

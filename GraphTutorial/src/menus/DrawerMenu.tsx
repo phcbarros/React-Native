@@ -24,6 +24,7 @@ import CalendarScreen from '../screens/calendar/CalendarScreen'
 
 import {AuthManager} from '../auth/AuthManager'
 import {GraphManager} from '../graph/GraphManager'
+import NewEventScreen from '../screens/new-event/NewEventScreen'
 
 const Drawer = createDrawerNavigator()
 
@@ -136,6 +137,13 @@ export default class DrawerMenuContent extends React.Component<DrawerMenuProps> 
               name="Calendar"
               component={CalendarScreen}
               options={{drawerLabel: 'Calendar'}}
+            />
+          )}
+          {userLoaded && (
+            <Drawer.Screen
+              name="NewEvent"
+              component={NewEventScreen}
+              options={{drawerLabel: 'New event'}}
             />
           )}
         </Drawer.Navigator>
