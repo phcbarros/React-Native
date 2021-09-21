@@ -1,13 +1,14 @@
 import React from 'react'
 import {StyleSheet, View} from 'react-native'
 
-import Scroll from './pages/Scroll'
+import Drag from './pages/Drag'
+//import Scroll from './pages/Scroll'
 //import Login from './pages/Login'
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Scroll />
+      <Drag />
     </View>
   )
 }
