@@ -1,4 +1,3 @@
-import { exp } from 'react-native-reanimated'
 import styled from 'styled-components/native'
 import colors from '../../styles/colors'
 
@@ -10,8 +9,14 @@ export const Container = styled.View`
   padding-right: 14px;
 `
 
-export const Avatar = styled.TouchableOpacity`
+export const ContainerAvatar = styled.TouchableOpacity`
   background-color: ${colors.tag};
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
+`
+
+export const Avatar = styled.Image`
   width: 32px;
   height: 32px;
   border-radius: 16px;

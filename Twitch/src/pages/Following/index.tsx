@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react'
-import { View } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 
 import { CategoryList } from '../../components/CategoryList'
+import { ChannelList } from '../../components/ChannelList'
 import { Header } from '../../components/Header'
 import { Heading } from '../../components/Heading'
 import { StreamList } from '../../components/StreamList'
@@ -48,7 +48,7 @@ export function Following() {
       },
       {
         key: 'C3',
-        render: () => <View />,
+        render: () => <StreamList />,
       },
       {
         key: 'OFFLINE_CHANNELS',
@@ -57,7 +57,7 @@ export function Following() {
       },
       {
         key: 'C4',
-        render: () => <View />,
+        render: () => <ChannelList />,
       },
     ]
 
@@ -81,9 +81,12 @@ export function Following() {
             data={data}
             renderItem={({ item }) => item.render()}
             keyExtractor={(item) => item.key}
-            stickyHeaderIndice={indexes}
+            stickyHeaderIndices={indexes}
             onRefresh={() => {}}
             refreshing={false}
+            contentContainerStyle={{
+              paddingBottom: 80,
+            }}
           />
         </S.Main>
       </S.Container>

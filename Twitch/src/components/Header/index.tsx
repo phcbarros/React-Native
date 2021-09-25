@@ -4,7 +4,6 @@ import {
   MaterialCommunityIcons,
   MaterialIcons,
 } from '@expo/vector-icons'
-import { View } from 'react-native'
 import colors from '../../styles/colors'
 
 import * as S from './styles'
@@ -12,9 +11,10 @@ import * as S from './styles'
 export function Header() {
   return (
     <S.Container>
-      <S.Avatar>
+      <S.ContainerAvatar>
+        <S.Avatar source={{ uri: 'https://github.com/phcbarros.png' }} />
         <S.OnlineStatus />
-      </S.Avatar>
+      </S.ContainerAvatar>
       <S.RightSide>
         <S.Button>
           <MaterialIcons
