@@ -1,14 +1,15 @@
 import React from 'react'
 import {StyleSheet, View} from 'react-native'
 
-import Drag from './pages/Drag'
+import Modal from './pages/Modal'
+//import Drag from './pages/Drag'
 //import Scroll from './pages/Scroll'
 //import Login from './pages/Login'
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Drag />
+      <Modal />
     </View>
   )
 }
