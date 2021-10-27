@@ -1272,6 +1272,11 @@
   dependencies:
     "@babel/types" "^7.3.0"
 
+"@types/detox@^17.14.3":
+  version "17.14.3"
+  resolved "https://registry.yarnpkg.com/@types/detox/-/detox-17.14.3.tgz#a869e561e3bfb10e3ae74d31ad7b977ba4a05421"
+  integrity sha512-TGvlYiol7snFjEk0spDkcfH12CZRAWa1g51bE0GEYa6iLtfYAqHXVc/f5TFhYV17YI5JoxGfwdSv8WDP9fbAIQ==
+
 "@types/eslint-visitor-keys@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@types/eslint-visitor-keys/-/eslint-visitor-keys-1.0.0.tgz#1ee30d79544ca84d68d4b3cdb0af4f205663dd2d"

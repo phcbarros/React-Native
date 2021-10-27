@@ -7,8 +7,11 @@
       "binaryPath": "android/app/build/outputs/apk/debug/app-debug.apk",
       "build": "cd android && ./gradlew assembleDebug assembleAndroidTest -DtestBuildType=debug && cd ..",
       "device": {
-        "avdName": "tests-acceptance-emulator"
+        "avdName": "Nexus_5X_API_29_x86"
       }
     }
+  },
+  "artifacts": {
+    "rootDir": "./e2e/artifacts"
   }
 }
