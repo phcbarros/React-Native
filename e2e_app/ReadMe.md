@@ -115,9 +115,24 @@ yarn detox init -r jest
       "device": {
         "avdName": "Pixel_3a_API_29"
       }
+    },
+    "ios.sim.debug": {
+      "type": "ios.simulator",
+      "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/e2e_app.app",
+      "build": "cd ios && xcodebuild -workspace e2e_app.xcworkspace  -scheme 'e2e_app' -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 12 Pro,OS=14.4' -derivedDataPath build  && cd ..",
+      "device": {
+        "name": "iPhone 12 Pro",
+        "os": "iOS 14.4"
+      }
     }
   }
 }
+```
+
+Listar emuladores
+
+```bash
+applesimutils --list
 ```
 
 ### 7. Gerando a build para teste

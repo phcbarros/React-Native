@@ -9,6 +9,15 @@
       "device": {
         "avdName": "Nexus_5X_API_29_x86"
       }
+    },
+    "ios.sim.debug": {
+      "type": "ios.simulator",
+      "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/e2e_app.app",
+      "build": "cd ios && xcodebuild -workspace e2e_app.xcworkspace  -scheme 'e2e_app' -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 12 Pro,OS=14.4' -derivedDataPath build  && cd ..",
+      "device": {
+        "name": "iPhone 12 Pro",
+        "os": "iOS 14.4"
+      }
     }
   },
   "artifacts": {
