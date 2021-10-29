@@ -53,7 +53,7 @@ No mesmo arquivo, adicione:
 
 ```java
 dependencies {
-		// Novas dependencias para rodar os testes.
+	// Novas dependencias para rodar os testes.
     androidTestImplementation('com.wix:detox:+') { transitive = true }
     androidTestImplementation 'junit:junit:4.12'
 }
@@ -64,7 +64,7 @@ dependencies {
 Agora, vamos criar um arquivo chamado **DetoxTest.java** no seguinte caminho: **_android/app/src/androidTest/java/com/[nome_do_package]/DetoxTest.java_**
 
 ```java
-package **com.package**; // Trocar pelo no do Projeto.
+package com.package; // Trocar pelo no do Projeto.
 
 import com.wix.detox.Detox;
 import com.wix.detox.config.DetoxConfig;
@@ -88,7 +88,7 @@ public class DetoxTest {
         DetoxConfig detoxConfig = new DetoxConfig();
         detoxConfig.idlePolicyConfig.masterTimeoutSec = 90;
         detoxConfig.idlePolicyConfig.idleResourceTimeoutSec = 60;
-        detoxConfig.rnContextLoadTimeoutSec = (**com.package**.BuildConfig.DEBUG ? 180 : 60);
+        detoxConfig.rnContextLoadTimeoutSec = (com.package.BuildConfig.DEBUG ? 180 : 60);
 
         Detox.runTests(mActivityRule, detoxConfig);
     }
@@ -149,7 +149,7 @@ yarn detox build -c ios.sim.debug
 
 ```bash
 No Android:
-detox test -c android.emu.debug
+yarn detox test -c android.emu.debug
 
 No iOS:
 yarn detox test -c ios.sim.debug
